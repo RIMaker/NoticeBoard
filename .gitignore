@@ -1,0 +1,8 @@
+*.generated.swift
+Pods
+.DS_Store
+xcuserdata/
+NoticeBoard.xcodeproj/xcuserdata
+NoticeBoard.xcodeproj/project.xcworkspace/xcuserdata
+NoticeBoard.xcworkspace/xcuserdata
+
