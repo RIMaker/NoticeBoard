@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ItemDetailsViewController.swift
 //  NoticeBoard
 //
 //  Created by Zhora Agadzhanyan on 24.08.2023.
@@ -7,13 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ItemDetailsViewController: NBViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
     }
 
-
 }
-
