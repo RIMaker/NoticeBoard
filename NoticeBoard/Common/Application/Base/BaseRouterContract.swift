@@ -7,10 +7,7 @@
 
 import Foundation
 
-protocol BaseRouterContract {
+@MainActor protocol BaseRouterContract: AnyObject {
     func route(to screenId: ScreenIdentifier)
     func dismiss()
-    func showAlert(title: String?, message: String?)
-    func showActivityIndicator()
-    func hideActivityIndicator()
 }

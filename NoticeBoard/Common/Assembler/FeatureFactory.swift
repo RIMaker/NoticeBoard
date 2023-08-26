@@ -13,7 +13,7 @@ enum ScreenIdentifier {
 }
 
 
-protocol FeatureFactory {
+@MainActor protocol FeatureFactory: AnyObject {
     func makeView(for screenIdentifier: ScreenIdentifier) -> UIViewController
 }
 
@@ -42,9 +42,12 @@ extension FeatureFactoryImpl {
     
     private func makeMainScreen() -> UIViewController {
         let itemsListVC = ItemsListViewController()
-        let router: ItemsListViewRouting = ItemsListRouter(featureFactory: self, viewController: itemsListVC)
+        let router: ItemsListViewRouting = ItemsListRouter(
+            featureFactory: self,
+            viewController: itemsListVC
+        )
         let presenter = ItemsListPresenter(
-            itemsListRepository: ItemsListRepositoryImpl.shared,
+            itemsListRepository: ItemsListRepositoryImpl(),
             router: router
         )
         presenter.input = itemsListVC

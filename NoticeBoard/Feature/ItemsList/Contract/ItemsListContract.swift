@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - View
-protocol ItemsListViewInput: AnyObject {
+@MainActor protocol ItemsListViewInput: AnyObject {
     func setup()
     func refreshViews()
 }
@@ -16,12 +16,12 @@ protocol ItemsListViewInput: AnyObject {
 // MARK: - Presenter
 protocol ItemsListViewOutput: AnyObject {
     init(itemsListRepository: ItemsListRepositoryContract, router: ItemsListViewRouting)
-    func viewShown()
+    @MainActor func viewShown()
     func showItemDetails(at indexPath: IndexPath)
 }
 
 // MARK: - Router
-protocol ItemsListViewRouting: BaseRouterContract {
+@MainActor protocol ItemsListViewRouting: BaseRouterContract {
     func showItemDetails(withId itemId: Int?)
 }
 

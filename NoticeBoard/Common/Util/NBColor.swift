@@ -46,5 +46,29 @@ enum NBColor {
         }
     }
     
+    //MARK: NBViewControllerPlaceholder
+    enum NBViewControllerPlaceholder {
+        
+        enum Button {
+            static var textColor: UIColor {
+                UIColor.black
+            }
+            
+            static var backgroundColor: UIColor {
+                UIColor.black.withAlphaComponent(0.2)
+            }
+        }
+        
+        static var textColor: UIColor {
+            UIColor.black
+        }
+        
+        static var backgroundColor: UIColor {
+            UIColor.white
+        }
+        
+        
+    }
+    
     
 }

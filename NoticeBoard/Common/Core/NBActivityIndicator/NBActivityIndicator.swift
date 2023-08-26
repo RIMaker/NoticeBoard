@@ -7,12 +7,7 @@
 
 import UIKit
 
-protocol NBActivityIndicatorProtocol {
-    func show(on viewController: UIViewController?)
-    func hide()
-}
-
-final class NBActivityIndicator: UIViewController, NBActivityIndicatorProtocol {
+final class NBActivityIndicator: UIViewController {
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityInd = UIActivityIndicatorView()
@@ -45,19 +40,12 @@ final class NBActivityIndicator: UIViewController, NBActivityIndicatorProtocol {
         ])
     }
 
-    func show(on viewController: UIViewController?) {
+    func startAnimating() {
         activityIndicator.startAnimating()
-        view.frame = viewController?.view.bounds ?? view.frame
-        viewController?.view.addSubview(view)
-        viewController?.addChild(self)
-        self.didMove(toParent: viewController)
     }
     
-    func hide() {
+    func stopAnimating() {
         activityIndicator.stopAnimating()
-        willMove(toParent: nil)
-        view.removeFromSuperview()
-        removeFromParent()
     }
     
     required init?(coder: NSCoder) {

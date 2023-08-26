@@ -12,11 +12,6 @@ class BaseRouter: NSObject, BaseRouterContract {
     var featureFactory: FeatureFactory
     weak var viewController: UIViewController?
     
-    private lazy var activityIndicator: NBActivityIndicatorProtocol = {
-        let indicator = NBActivityIndicator()
-        return indicator
-    }()
-    
     init(featureFactory: FeatureFactory, viewController: UIViewController) {
         self.featureFactory = featureFactory
         self.viewController = viewController
@@ -39,23 +34,6 @@ class BaseRouter: NSObject, BaseRouterContract {
         navVC.popViewController(animated: true)
     }
     
-    func showAlert(title: String?, message: String?) {
-        
-    }
-    
-    func showActivityIndicator() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            self.activityIndicator.show(on: self.viewController)
-        }
-    }
-    
-    func hideActivityIndicator() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            self.activityIndicator.hide()
-        }
-    }
 }
 
 
