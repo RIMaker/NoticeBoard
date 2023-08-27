@@ -9,18 +9,6 @@ import UIKit
 
 class ItemCollectionViewCell: NBCollectionViewCell {
     
-    override var isHighlighted: Bool {
-        didSet {
-            setupContentConstraints(isDownscale: isHighlighted)
-        }
-    }
-    
-    override var isSelected: Bool {
-        didSet {
-            setupContentConstraints(isDownscale: isSelected)
-        }
-    }
-    
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()
@@ -119,26 +107,6 @@ class ItemCollectionViewCell: NBCollectionViewCell {
         contentTrailingConstraint?.isActive = true
         contentBottomConstraint?.isActive = true
         titleLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor).isActive = true
-    }
-    
-    private func setupContentConstraints(isDownscale: Bool) {
-        
-        if isDownscale {
-            contentTopConstraint?.constant = 5
-            contentLeadingConstraint?.constant = 5
-            contentTrailingConstraint?.constant = -5
-            contentBottomConstraint?.constant = -5
-        } else {
-            contentTopConstraint?.constant = 0
-            contentLeadingConstraint?.constant = 0
-            contentTrailingConstraint?.constant = 0
-            contentBottomConstraint?.constant = 0
-        }
-        
-        UIView.animate(withDuration: 0.15, delay: 0) { [weak self] in
-            self?.layoutIfNeeded()
-        }
-
     }
     
     required init?(coder: NSCoder) {

@@ -118,10 +118,30 @@ extension NBCollectionView: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        
         didSelectItemAt?(indexPath)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            collectionView.deselectItem(at: indexPath, animated: false)
-        }
+        
+        cell.makeScale(0.95, 0.95, completion: {
+            cell.makeScale(1, 1)
+        })
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        
+        cell.makeScale(0.95, 0.95)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        
+        cell.makeScale(1, 1)
+        
     }
     
 }
