@@ -9,11 +9,33 @@ import UIKit
 
 class ItemCollectionViewCell: NBCollectionViewCell {
     
+    fileprivate enum StateForDownscale {
+        case selected
+        case highlighted
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            setupContentConstraints(downscaleForState: .highlighted, isDownscale: isHighlighted)
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            setupContentConstraints(downscaleForState: .selected, isDownscale: isSelected)
+        }
+    }
+    
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()
     private let locationLabel = UILabel()
     private let dateLabel = UILabel()
+    
+    private var contentTopConstraint: NSLayoutConstraint?
+    private var contentBottomConstraint: NSLayoutConstraint?
+    private var contentLeadingConstraint: NSLayoutConstraint?
+    private var contentTrailingConstraint: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,13 +69,13 @@ class ItemCollectionViewCell: NBCollectionViewCell {
         imageView.image = UIImage.imagePlaceholder
         imageView.cancelImageLoad()
     }
+    
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        layoutAttributes.bounds.size.height = systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+        return layoutAttributes
+    }
 
     private func setupViews() {
-        contentView.addSubview(imageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(priceLabel)
-        contentView.addSubview(locationLabel)
-        contentView.addSubview(dateLabel)
         
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = ViewConstants.imageViewCornerRadius
@@ -75,43 +97,61 @@ class ItemCollectionViewCell: NBCollectionViewCell {
     }
     
     private func setupConstraints() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        locationLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 6),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
-            priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            priceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            locationLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 6),
-            locationLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            locationLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            dateLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 4),
-            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        let vStack = UIStackView(arrangedSubviews: [
+            imageView,
+            titleLabel,
+            priceLabel,
+            locationLabel,
+            dateLabel
         ])
+        vStack.spacing = 6
+        vStack.distribution = .fill
+        vStack.alignment = .leading
+        vStack.axis = .vertical
+        vStack.setCustomSpacing(4, after: locationLabel)
+        contentView.addSubview(vStack)
+        
+        vStack.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        contentTopConstraint = vStack.topAnchor.constraint(equalTo: contentView.topAnchor)
+        contentLeadingConstraint = vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
+        contentTrailingConstraint = vStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        contentBottomConstraint = vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        
+        contentTopConstraint?.isActive = true
+        contentLeadingConstraint?.isActive = true
+        contentTrailingConstraint?.isActive = true
+        contentBottomConstraint?.isActive = true
+        titleLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor).isActive = true
+    }
+    
+    private func setupContentConstraints(downscaleForState: StateForDownscale, isDownscale: Bool) {
+        
+        if isDownscale {
+            contentTopConstraint?.constant = 10
+            contentLeadingConstraint?.constant = 10
+            contentTrailingConstraint?.constant = -10
+            contentBottomConstraint?.constant = -10
+        } else {
+            contentTopConstraint?.constant = 0
+            contentLeadingConstraint?.constant = 0
+            contentTrailingConstraint?.constant = 0
+            contentBottomConstraint?.constant = 0
+        }
+        
+        UIView.animate(withDuration: 0.2, delay: 0) { [weak self] in
+            self?.layoutIfNeeded()
+        } completion: { [weak self] isComplete in
+            if isComplete && isDownscale && downscaleForState == .selected {
+                self?.setupContentConstraints(downscaleForState: downscaleForState, isDownscale: false)
+            }
+        }
+
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        layoutAttributes.bounds.size.height = systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-        return layoutAttributes
     }
     
 }
