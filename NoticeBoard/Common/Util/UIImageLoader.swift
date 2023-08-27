@@ -58,14 +58,18 @@ fileprivate class ImageLoader {
         
         let uuid = UUID()
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             
-            defer {self.runningRequests.removeValue(forKey: uuid) }
+            defer { self?.runningRequests.removeValue(forKey: uuid) }
             
-            
-            if let data = data, let image = UIImage(data: data) {
-                self.loadedImages.setObject(image, forKey: cacheID)
-                completion(.success(image))
+            if
+                let data = data,
+                let image = UIImage(data: data),
+                let compressedData = image.jpeg(.lowest),
+                let compressedImage = UIImage(data: compressedData)
+            {
+                self?.loadedImages.setObject(compressedImage, forKey: cacheID)
+                completion(.success(compressedImage))
                 return
             }
             
