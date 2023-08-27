@@ -11,7 +11,9 @@ class NBViewController: UIViewController {
     
     var state: NBViewControllerState = .content {
         didSet {
-            stateDidSet()
+            DispatchQueue.main.async {
+                self.stateDidSet()
+            }
         }
     }
     
@@ -47,12 +49,12 @@ class NBViewController: UIViewController {
         viewControllerPlaceholder.didMove(toParent: self)
         
         NSLayoutConstraint.activate([
-            activityIndicator.view.topAnchor.constraint(equalTo: view.topAnchor),
+            activityIndicator.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             activityIndicator.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             activityIndicator.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             activityIndicator.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            viewControllerPlaceholder.view.topAnchor.constraint(equalTo: view.topAnchor),
+            viewControllerPlaceholder.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             viewControllerPlaceholder.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             viewControllerPlaceholder.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             viewControllerPlaceholder.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -101,8 +103,8 @@ extension NBViewController {
         var modelCopy = model
         if let modelOnTap = modelCopy.button?.onTap {
             modelCopy.button?.onTap = { [weak self] in
+                self?.hideViewControllerPlaceholder()
                 modelOnTap()
-                self?.state = .content
             }
         }
         
@@ -124,8 +126,7 @@ extension NBViewController {
                 title: Constants.noInternetConnectionTitle,
                 button: .init(
                     title: Constants.tryAgainTitle,
-                    onTap: { [weak self] in
-                        self?.hideViewControllerPlaceholder()
+                    onTap: {
                         onTap?()
                     }
                 )
@@ -135,8 +136,7 @@ extension NBViewController {
                 title: Constants.defaultErrorTitle,
                 button: .init(
                     title: Constants.tryAgainTitle,
-                    onTap: { [weak self] in
-                        self?.hideViewControllerPlaceholder()
+                    onTap: {
                         onTap?()
                     }
                 )

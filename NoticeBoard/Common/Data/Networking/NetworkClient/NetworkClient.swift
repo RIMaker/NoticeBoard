@@ -16,7 +16,7 @@ protocol NetworkClientContract: AnyObject {
 
 class NetworkClientImpl: NetworkClientContract {
     
-    private let session: URLSession = URLSession(configuration: .default)
+    private let session: URLSession = URLSession.shared
     
     private let requestBuilder: RequestBuilderContract
     

@@ -25,6 +25,7 @@ final class RequestBuilderImpl: RequestBuilderContract {
         }
         
         var urlRequest = URLRequest(url: url, timeoutInterval: 15)
+        urlRequest.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         urlRequest.httpMethod = request.httpMethod.rawValue
         urlRequest.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
         

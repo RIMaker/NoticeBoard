@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ItemDetailsRepositoryContract {
+protocol ItemDetailsRepositoryContract: AnyObject {
     func getAdvertisementDetails(itemId: String?, completion: @escaping (Result<AdvertisementDetails?, NetworkError>)->Void)
 }
 

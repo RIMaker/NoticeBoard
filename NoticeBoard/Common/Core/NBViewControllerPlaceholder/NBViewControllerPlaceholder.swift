@@ -16,7 +16,7 @@ final class NBViewControllerPlaceholder: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.numberOfLines = 0
         lbl.textColor = NBColor.NBViewControllerPlaceholder.textColor
-        lbl.font = .systemFont(ofSize: 16)
+        lbl.font = .boldSystemFont(ofSize: 20)
         return lbl
     }()
     private lazy var button: UIButton = {
@@ -61,11 +61,12 @@ final class NBViewControllerPlaceholder: UIViewController {
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            button.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.heightAnchor.constraint(equalToConstant: 40),
-            button.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -32)
+            titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
+            button.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 62),
+            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            button.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor),
+            button.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     

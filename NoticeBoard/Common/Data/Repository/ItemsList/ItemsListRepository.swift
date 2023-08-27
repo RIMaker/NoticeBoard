@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ItemsListRepositoryContract {
+protocol ItemsListRepositoryContract: AnyObject {
     func getAdvertisements(completion: @escaping (Result<[Advertisement]?, NetworkError>)->Void)
 }
 

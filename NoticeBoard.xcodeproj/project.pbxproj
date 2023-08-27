@@ -24,6 +24,11 @@
 		7C6CFB2B2A9A4BF500F24156 /* NBViewControllerPlaceholderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB2A2A9A4BF500F24156 /* NBViewControllerPlaceholderModel.swift */; };
 		7C6CFB2D2A9A61B800F24156 /* NBViewControllerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB2C2A9A61B800F24156 /* NBViewControllerState.swift */; };
 		7C6CFB2F2A9A6FCC00F24156 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB2E2A9A6FCC00F24156 /* Constants.swift */; };
+		7C6CFB322A9A7D1D00F24156 /* NBCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB312A9A7D1D00F24156 /* NBCollectionView.swift */; };
+		7C6CFB342A9A816400F24156 /* NBCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB332A9A816400F24156 /* NBCollectionViewModel.swift */; };
+		7C6CFB362A9A81AC00F24156 /* NBCollectionViewCellInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB352A9A81AC00F24156 /* NBCollectionViewCellInput.swift */; };
+		7C6CFB392A9A87FF00F24156 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB382A9A87FF00F24156 /* ItemCollectionViewCell.swift */; };
+		7C6CFB3C2A9A895D00F24156 /* ItemCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB3B2A9A895D00F24156 /* ItemCellData.swift */; };
 		7C90FABF2A97F24300E5BE62 /* FeatureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FABE2A97F24300E5BE62 /* FeatureFactory.swift */; };
 		7C90FACB2A97F3D000E5BE62 /* ItemsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FACA2A97F3D000E5BE62 /* ItemsListViewController.swift */; };
 		7C90FACD2A97F3DE00E5BE62 /* ItemsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FACC2A97F3DE00E5BE62 /* ItemsListPresenter.swift */; };
@@ -64,6 +69,11 @@
 		7C6CFB2A2A9A4BF500F24156 /* NBViewControllerPlaceholderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBViewControllerPlaceholderModel.swift; sourceTree = "<group>"; };
 		7C6CFB2C2A9A61B800F24156 /* NBViewControllerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBViewControllerState.swift; sourceTree = "<group>"; };
 		7C6CFB2E2A9A6FCC00F24156 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7C6CFB312A9A7D1D00F24156 /* NBCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBCollectionView.swift; sourceTree = "<group>"; };
+		7C6CFB332A9A816400F24156 /* NBCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBCollectionViewModel.swift; sourceTree = "<group>"; };
+		7C6CFB352A9A81AC00F24156 /* NBCollectionViewCellInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBCollectionViewCellInput.swift; sourceTree = "<group>"; };
+		7C6CFB382A9A87FF00F24156 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		7C6CFB3B2A9A895D00F24156 /* ItemCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellData.swift; sourceTree = "<group>"; };
 		7C90FABE2A97F24300E5BE62 /* FeatureFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFactory.swift; sourceTree = "<group>"; };
 		7C90FACA2A97F3D000E5BE62 /* ItemsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListViewController.swift; sourceTree = "<group>"; };
 		7C90FACC2A97F3DE00E5BE62 /* ItemsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListPresenter.swift; sourceTree = "<group>"; };
@@ -180,6 +190,33 @@
 			path = NBViewControllerPlaceholder;
 			sourceTree = "<group>";
 		};
+		7C6CFB302A9A7C3700F24156 /* NBCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				7C6CFB312A9A7D1D00F24156 /* NBCollectionView.swift */,
+				7C6CFB332A9A816400F24156 /* NBCollectionViewModel.swift */,
+				7C6CFB352A9A81AC00F24156 /* NBCollectionViewCellInput.swift */,
+			);
+			path = NBCollectionView;
+			sourceTree = "<group>";
+		};
+		7C6CFB372A9A87E100F24156 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				7C6CFB3A2A9A894400F24156 /* ItemCell */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		7C6CFB3A2A9A894400F24156 /* ItemCell */ = {
+			isa = PBXGroup;
+			children = (
+				7C6CFB382A9A87FF00F24156 /* ItemCollectionViewCell.swift */,
+				7C6CFB3B2A9A895D00F24156 /* ItemCellData.swift */,
+			);
+			path = ItemCell;
+			sourceTree = "<group>";
+		};
 		7C90FAB32A97EF3D00E5BE62 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +281,7 @@
 				7C6CFB282A9A4BC700F24156 /* NBViewController */,
 				7C6CFB292A9A4BCA00F24156 /* NBViewControllerPlaceholder */,
 				7C6CFB272A9A4BBE00F24156 /* NBActivityIndicator */,
+				7C6CFB302A9A7C3700F24156 /* NBCollectionView */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -307,6 +345,7 @@
 		7C90FAC22A97F36B00E5BE62 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7C6CFB372A9A87E100F24156 /* Subviews */,
 				7C90FACA2A97F3D000E5BE62 /* ItemsListViewController.swift */,
 			);
 			path = View;
@@ -514,14 +553,18 @@
 				7C90FAE02A97F96000E5BE62 /* NBColor.swift in Sources */,
 				7C6CFB2D2A9A61B800F24156 /* NBViewControllerState.swift in Sources */,
 				7C90FAD92A97F44500E5BE62 /* ItemDetailsContract.swift in Sources */,
+				7C6CFB392A9A87FF00F24156 /* ItemCollectionViewCell.swift in Sources */,
 				7C6CFB262A9A496C00F24156 /* NBViewControllerPlaceholder.swift in Sources */,
 				7C90FACB2A97F3D000E5BE62 /* ItemsListViewController.swift in Sources */,
 				7C6CFB242A9A3FD600F24156 /* ItemDetailsRepository.swift in Sources */,
 				7C90FAF02A97FF3C00E5BE62 /* NBViewController.swift in Sources */,
 				7C90FABF2A97F24300E5BE62 /* FeatureFactory.swift in Sources */,
+				7C6CFB362A9A81AC00F24156 /* NBCollectionViewCellInput.swift in Sources */,
 				7C6CFB092A9A181000F24156 /* AdvertisementDetails.swift in Sources */,
 				7C90FACF2A97F3F200E5BE62 /* ItemsListRouter.swift in Sources */,
+				7C6CFB342A9A816400F24156 /* NBCollectionViewModel.swift in Sources */,
 				7C6CFB192A9A213000F24156 /* DecodingNetworkResponseConverterImpl.swift in Sources */,
+				7C6CFB322A9A7D1D00F24156 /* NBCollectionView.swift in Sources */,
 				7C90FAE62A97FBAD00E5BE62 /* ItemsListRepository.swift in Sources */,
 				7C6CFB152A9A1F6600F24156 /* NetworkResponseConverterContract.swift in Sources */,
 				7C6CFB0E2A9A1E7300F24156 /* RequestBuilder.swift in Sources */,
@@ -536,6 +579,7 @@
 				7C6CFB132A9A1F4800F24156 /* NetworkResponseConverterOf.swift in Sources */,
 				7C6CFB062A9A157B00F24156 /* AdvertisementsResponse.swift in Sources */,
 				7C90FAEA2A97FBCD00E5BE62 /* BaseRouterContract.swift in Sources */,
+				7C6CFB3C2A9A895D00F24156 /* ItemCellData.swift in Sources */,
 				7C6CFB102A9A1EC600F24156 /* NetworkRequestContract.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
