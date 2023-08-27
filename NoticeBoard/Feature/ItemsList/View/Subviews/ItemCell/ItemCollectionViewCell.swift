@@ -39,7 +39,7 @@ class ItemCollectionViewCell: NBCollectionViewCell {
             dateLabel.text = "-"
             return
         }
-        dateLabel.text = DateFormatter.ddMMMMyyyy.string(from: createdDate)
+        dateLabel.text = DateFormatter.ddMMyyyy.string(from: createdDate)
     }
     
     override func prepareForReuse() {

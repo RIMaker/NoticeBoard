@@ -8,9 +8,9 @@
 import Foundation
 
 extension DateFormatter {
-    static var ddMMMMyyyy: DateFormatter {
+    static var ddMMyyyy: DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMMM yyyy"
+        formatter.dateFormat = "dd.MM.yyyy"
         formatter.timeZone = Calendar.current.timeZone
         formatter.locale = Calendar.current.locale
         return formatter
