@@ -9,20 +9,15 @@ import UIKit
 
 class ItemCollectionViewCell: NBCollectionViewCell {
     
-    fileprivate enum StateForDownscale {
-        case selected
-        case highlighted
-    }
-    
     override var isHighlighted: Bool {
         didSet {
-            setupContentConstraints(downscaleForState: .highlighted, isDownscale: isHighlighted)
+            setupContentConstraints(isDownscale: isHighlighted)
         }
     }
     
     override var isSelected: Bool {
         didSet {
-            setupContentConstraints(downscaleForState: .selected, isDownscale: isSelected)
+            setupContentConstraints(isDownscale: isSelected)
         }
     }
     
@@ -126,7 +121,7 @@ class ItemCollectionViewCell: NBCollectionViewCell {
         titleLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor).isActive = true
     }
     
-    private func setupContentConstraints(downscaleForState: StateForDownscale, isDownscale: Bool) {
+    private func setupContentConstraints(isDownscale: Bool) {
         
         if isDownscale {
             contentTopConstraint?.constant = 5
@@ -142,10 +137,6 @@ class ItemCollectionViewCell: NBCollectionViewCell {
         
         UIView.animate(withDuration: 0.15, delay: 0) { [weak self] in
             self?.layoutIfNeeded()
-        } completion: { [weak self] isComplete in
-            if isComplete && isDownscale && downscaleForState == .selected {
-                self?.setupContentConstraints(downscaleForState: downscaleForState, isDownscale: false)
-            }
         }
 
     }

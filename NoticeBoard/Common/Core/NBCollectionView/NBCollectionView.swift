@@ -10,6 +10,7 @@ import UIKit
 class NBCollectionView: UIView {
     
     var onTopRefresh: (() -> ())?
+    var didSelectItemAt: ((_ indexPath: IndexPath) -> ())?
     
     private var models: [NBCollectionViewModel] = []
     private var registerIds: Set<String> = []
@@ -114,6 +115,13 @@ extension NBCollectionView: UICollectionViewDelegate, UICollectionViewDataSource
         }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectItemAt?(indexPath)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            collectionView.deselectItem(at: indexPath, animated: false)
+        }
     }
     
 }
