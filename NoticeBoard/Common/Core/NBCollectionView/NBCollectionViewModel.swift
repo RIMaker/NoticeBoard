@@ -12,11 +12,12 @@ typealias NBCollectionViewCell = UICollectionViewCell & NBCollectionViewCellInpu
 struct NBCollectionViewModel: Equatable {
     
     let id: String
-    let data: AnyHashable
+    let data: NBCollectionViewModelData
     let cellType: NBCollectionViewCell.Type
     
     static func == (lhs: NBCollectionViewModel, rhs: NBCollectionViewModel) -> Bool {
-        lhs.id == rhs.id &&
-        lhs.data == rhs.data
+        lhs.id == rhs.id
     }
 }
+
+protocol NBCollectionViewModelData {}

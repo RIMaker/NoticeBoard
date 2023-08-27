@@ -63,14 +63,14 @@ class NBCollectionView: UIView {
         guard self.models != models else { return }
         
         self.models = models
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
         }
     }
     
     private func endRefreshing() {
-        DispatchQueue.main.async {
-            self.refreshControl.endRefreshing()
+        DispatchQueue.main.async { [weak self] in
+            self?.refreshControl.endRefreshing()
         }
     }
     
@@ -128,13 +128,15 @@ extension NBCollectionView: UICollectionViewDelegateFlowLayout {
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         let widthPerItem = (collectionView.frame.width - layout.minimumInteritemSpacing - layout.sectionInset.left - layout.sectionInset.right) / 2
-           
-        return CGSize(width: widthPerItem, height: 100)
+        let heightPerItem = ViewConstants.heightPerItem
+        
+        return CGSize(width: widthPerItem, height: heightPerItem)
     }
 }
 
 fileprivate enum ViewConstants {
-    static let minimumLineSpacing: CGFloat = 20
+    static let minimumLineSpacing: CGFloat = 16
     static let minimumInteritemSpacing: CGFloat = 10
-    static let sectionInset = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
+    static let sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    static let heightPerItem: CGFloat = UIScreen.main.bounds.height / 3
 }

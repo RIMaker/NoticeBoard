@@ -11,8 +11,8 @@ class NBViewController: UIViewController {
     
     var state: NBViewControllerState = .content {
         didSet {
-            DispatchQueue.main.async {
-                self.stateDidSet()
+            DispatchQueue.main.async { [weak self] in
+                self?.stateDidSet()
             }
         }
     }
@@ -131,6 +131,12 @@ extension NBViewController {
                     }
                 )
             ))
+        case .noData:
+            showViewControllerPlaceholder(with: .init(
+                title: Constants.noDataTitle,
+                button: nil
+                )
+            )
         default:
             showViewControllerPlaceholder(with: .init(
                 title: Constants.defaultErrorTitle,

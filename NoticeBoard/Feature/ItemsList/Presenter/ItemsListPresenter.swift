@@ -45,9 +45,8 @@ final class ItemsListPresenter: ItemsListViewOutput {
         
     }
     
-    private func handleAdvertisementsLoading(_ response: [Advertisement]?) {
-        input?.state = .content
-        input?.display(models: response!.map {
+    private func handleAdvertisementsLoading(_ response: [Advertisement]) {
+        let models = response.map {
             NBCollectionViewModel(
                 id: "\($0)",
                 data: ItemCellData(
@@ -59,8 +58,9 @@ final class ItemsListPresenter: ItemsListViewOutput {
                 ),
                 cellType: ItemCollectionViewCell.self
             )
-            }
-       )
+        }
+        input?.state = .content
+        input?.display(models: models)
     }
     
     private func handleAdvertisementsLoading(_ error: NetworkError) {

@@ -29,6 +29,12 @@
 		7C6CFB362A9A81AC00F24156 /* NBCollectionViewCellInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB352A9A81AC00F24156 /* NBCollectionViewCellInput.swift */; };
 		7C6CFB392A9A87FF00F24156 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB382A9A87FF00F24156 /* ItemCollectionViewCell.swift */; };
 		7C6CFB3C2A9A895D00F24156 /* ItemCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB3B2A9A895D00F24156 /* ItemCellData.swift */; };
+		7C7078082A9B3329001CB151 /* UIImage + JPEGQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7078072A9B3329001CB151 /* UIImage + JPEGQuality.swift */; };
+		7C70780A2A9B3456001CB151 /* UIImageView + load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7078092A9B3456001CB151 /* UIImageView + load.swift */; };
+		7C70780C2A9B34BA001CB151 /* UIImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C70780B2A9B34BA001CB151 /* UIImageLoader.swift */; };
+		7C70780E2A9B4227001CB151 /* UIImage + imagePlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C70780D2A9B4227001CB151 /* UIImage + imagePlaceholder.swift */; };
+		7C7078102A9B718F001CB151 /* DateFormatter + yyyMMdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C70780F2A9B718F001CB151 /* DateFormatter + yyyMMdd.swift */; };
+		7C7078122A9B71BD001CB151 /* DateFormatter + ddMMMMyyyy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7078112A9B71BD001CB151 /* DateFormatter + ddMMMMyyyy.swift */; };
 		7C90FABF2A97F24300E5BE62 /* FeatureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FABE2A97F24300E5BE62 /* FeatureFactory.swift */; };
 		7C90FACB2A97F3D000E5BE62 /* ItemsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FACA2A97F3D000E5BE62 /* ItemsListViewController.swift */; };
 		7C90FACD2A97F3DE00E5BE62 /* ItemsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FACC2A97F3DE00E5BE62 /* ItemsListPresenter.swift */; };
@@ -74,6 +80,12 @@
 		7C6CFB352A9A81AC00F24156 /* NBCollectionViewCellInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBCollectionViewCellInput.swift; sourceTree = "<group>"; };
 		7C6CFB382A9A87FF00F24156 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C6CFB3B2A9A895D00F24156 /* ItemCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellData.swift; sourceTree = "<group>"; };
+		7C7078072A9B3329001CB151 /* UIImage + JPEGQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + JPEGQuality.swift"; sourceTree = "<group>"; };
+		7C7078092A9B3456001CB151 /* UIImageView + load.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + load.swift"; sourceTree = "<group>"; };
+		7C70780B2A9B34BA001CB151 /* UIImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageLoader.swift; sourceTree = "<group>"; };
+		7C70780D2A9B4227001CB151 /* UIImage + imagePlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + imagePlaceholder.swift"; sourceTree = "<group>"; };
+		7C70780F2A9B718F001CB151 /* DateFormatter + yyyMMdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter + yyyMMdd.swift"; sourceTree = "<group>"; };
+		7C7078112A9B71BD001CB151 /* DateFormatter + ddMMMMyyyy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter + ddMMMMyyyy.swift"; sourceTree = "<group>"; };
 		7C90FABE2A97F24300E5BE62 /* FeatureFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFactory.swift; sourceTree = "<group>"; };
 		7C90FACA2A97F3D000E5BE62 /* ItemsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListViewController.swift; sourceTree = "<group>"; };
 		7C90FACC2A97F3DE00E5BE62 /* ItemsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListPresenter.swift; sourceTree = "<group>"; };
@@ -299,6 +311,11 @@
 		7C90FABB2A97EFFB00E5BE62 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				7C7078072A9B3329001CB151 /* UIImage + JPEGQuality.swift */,
+				7C70780D2A9B4227001CB151 /* UIImage + imagePlaceholder.swift */,
+				7C7078092A9B3456001CB151 /* UIImageView + load.swift */,
+				7C70780F2A9B718F001CB151 /* DateFormatter + yyyMMdd.swift */,
+				7C7078112A9B71BD001CB151 /* DateFormatter + ddMMMMyyyy.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -316,6 +333,7 @@
 				7C6CFB1D2A9A2E9C00F24156 /* API.swift */,
 				7C90FADF2A97F96000E5BE62 /* NBColor.swift */,
 				7C6CFB2E2A9A6FCC00F24156 /* Constants.swift */,
+				7C70780B2A9B34BA001CB151 /* UIImageLoader.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -547,6 +565,7 @@
 				7C6CFB172A9A1FB400F24156 /* NetworkError.swift in Sources */,
 				7C90FADC2A97F7AB00E5BE62 /* BaseRouter.swift in Sources */,
 				7C6CFB1E2A9A2E9C00F24156 /* API.swift in Sources */,
+				7C70780E2A9B4227001CB151 /* UIImage + imagePlaceholder.swift in Sources */,
 				7C90FADE2A97F8B000E5BE62 /* NBActivityIndicator.swift in Sources */,
 				7C90FAD52A97F42E00E5BE62 /* ItemDetailsPresenter.swift in Sources */,
 				7C90FAD72A97F43A00E5BE62 /* ItemDetailsRouter.swift in Sources */,
@@ -559,6 +578,7 @@
 				7C6CFB242A9A3FD600F24156 /* ItemDetailsRepository.swift in Sources */,
 				7C90FAF02A97FF3C00E5BE62 /* NBViewController.swift in Sources */,
 				7C90FABF2A97F24300E5BE62 /* FeatureFactory.swift in Sources */,
+				7C70780C2A9B34BA001CB151 /* UIImageLoader.swift in Sources */,
 				7C6CFB362A9A81AC00F24156 /* NBCollectionViewCellInput.swift in Sources */,
 				7C6CFB092A9A181000F24156 /* AdvertisementDetails.swift in Sources */,
 				7C90FACF2A97F3F200E5BE62 /* ItemsListRouter.swift in Sources */,
@@ -570,14 +590,18 @@
 				7C6CFB0E2A9A1E7300F24156 /* RequestBuilder.swift in Sources */,
 				7C6CFB042A9A143900F24156 /* Advertisement.swift in Sources */,
 				7CEB57002A97EC2C00D520FF /* SceneDelegate.swift in Sources */,
+				7C7078082A9B3329001CB151 /* UIImage + JPEGQuality.swift in Sources */,
 				7C6CFB2F2A9A6FCC00F24156 /* Constants.swift in Sources */,
 				7C90FACD2A97F3DE00E5BE62 /* ItemsListPresenter.swift in Sources */,
+				7C7078122A9B71BD001CB151 /* DateFormatter + ddMMMMyyyy.swift in Sources */,
 				7C90FAD32A97F41A00E5BE62 /* ItemDetailsViewController.swift in Sources */,
 				7C90FAD12A97F3FF00E5BE62 /* ItemsListContract.swift in Sources */,
 				7C6CFB0B2A9A1D0000F24156 /* HTTPMethod.swift in Sources */,
 				7C90FAEE2A97FD0300E5BE62 /* NetworkClient.swift in Sources */,
 				7C6CFB132A9A1F4800F24156 /* NetworkResponseConverterOf.swift in Sources */,
 				7C6CFB062A9A157B00F24156 /* AdvertisementsResponse.swift in Sources */,
+				7C7078102A9B718F001CB151 /* DateFormatter + yyyMMdd.swift in Sources */,
+				7C70780A2A9B3456001CB151 /* UIImageView + load.swift in Sources */,
 				7C90FAEA2A97FBCD00E5BE62 /* BaseRouterContract.swift in Sources */,
 				7C6CFB3C2A9A895D00F24156 /* ItemCellData.swift in Sources */,
 				7C6CFB102A9A1EC600F24156 /* NetworkRequestContract.swift in Sources */,

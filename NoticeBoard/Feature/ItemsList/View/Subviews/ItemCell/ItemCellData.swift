@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ItemCellData: Hashable {
+struct ItemCellData: NBCollectionViewModelData {
     let title: String?
     let price: String?
     let location: String?

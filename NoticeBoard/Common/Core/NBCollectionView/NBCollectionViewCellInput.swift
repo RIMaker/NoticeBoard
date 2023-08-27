@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NBCollectionViewCellInput {
-    func update(with data: Any)
+    func update(with data: NBCollectionViewModelData)
 }
