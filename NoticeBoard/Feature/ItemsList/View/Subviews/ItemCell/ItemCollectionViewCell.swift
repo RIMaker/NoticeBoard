@@ -118,7 +118,6 @@ class ItemCollectionViewCell: NBCollectionViewCell {
 
 fileprivate enum ViewConstants {
     static let imageViewCornerRadius: CGFloat = 8
-    static let imageViewHeight: CGFloat = 5 / 8
     static let titleLabelNumberOfLines: Int = 2
     static let titleLabelFontSize: CGFloat = 16
     static let priceLabelFontSize: CGFloat = 16
