@@ -135,7 +135,7 @@ extension NBCollectionView: UICollectionViewDelegateFlowLayout {
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         let widthPerItem = (collectionView.frame.width - layout.minimumInteritemSpacing - layout.sectionInset.left - layout.sectionInset.right) / 2
-        let heightPerItem = ViewConstants.heightPerItem
+        let heightPerItem = collectionView.frame.height * ViewConstants.heightPerItemScale
         
         return CGSize(width: widthPerItem, height: heightPerItem)
     }
@@ -145,5 +145,5 @@ fileprivate enum ViewConstants {
     static let minimumLineSpacing: CGFloat = 16
     static let minimumInteritemSpacing: CGFloat = 10
     static let sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-    static let heightPerItem: CGFloat = UIScreen.main.bounds.height / 3
+    static let heightPerItemScale: CGFloat = 10 / 27
 }

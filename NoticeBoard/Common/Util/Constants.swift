@@ -16,4 +16,8 @@ struct Constants {
     enum ItemsListViewController {
         static let title = "Объявления"
     }
+    
+    enum ItemDetailsViewController {
+        static let title = "Подробная информация"
+    }
 }

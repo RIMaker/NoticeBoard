@@ -11,6 +11,8 @@ final class ItemsListPresenter: ItemsListViewOutput {
     
     weak var input: ItemsListViewInput?
     
+    private var advertisements: [Advertisement]?
+    
     private let itemsListRepository: ItemsListRepositoryContract
     private let router: ItemsListViewRouting
     
@@ -24,12 +26,19 @@ final class ItemsListPresenter: ItemsListViewOutput {
         input?.onTopRefresh = { [weak self] in
             self?.fetchAdvertisements()
         }
+        input?.didSelectItemAt = { [weak self] indexPath in
+            self?.showItemDetails(at: indexPath)
+        }
         
         fetchAdvertisements()
     }
     
-    func showItemDetails(at indexPath: IndexPath) {
+    private func showItemDetails(at indexPath: IndexPath) {
+        guard let advertisements, indexPath.item < advertisements.count else { return }
         
+        let advertisement = advertisements[indexPath.item]
+        
+        router.showItemDetails(withId: advertisement.id)
     }
     
     private func fetchAdvertisements() {
@@ -46,6 +55,8 @@ final class ItemsListPresenter: ItemsListViewOutput {
     }
     
     private func handleAdvertisementsLoading(_ response: [Advertisement]) {
+        self.advertisements = response
+        
         let models = response.map {
             NBCollectionViewModel(
                 data: ItemCellData(

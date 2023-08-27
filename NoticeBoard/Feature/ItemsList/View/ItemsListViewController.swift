@@ -44,6 +44,11 @@ extension ItemsListViewController: ItemsListViewInput {
         set { collectionView.onTopRefresh = newValue }
     }
     
+    var didSelectItemAt: ((_ indexPath: IndexPath) -> ())? {
+        get { collectionView.didSelectItemAt }
+        set { collectionView.didSelectItemAt = newValue }
+    }
+    
     func setup() {
         setupViews()
         setupConstraints()

@@ -11,6 +11,7 @@ import UIKit
 @MainActor protocol ItemsListViewInput: AnyObject {
     var state: NBViewControllerState { get set }
     var onTopRefresh: (() -> ())? { get set }
+    var didSelectItemAt: ((_ indexPath: IndexPath) -> ())? { get set }
     func setup()
     func display(models: [NBCollectionViewModel])
 }
@@ -19,11 +20,10 @@ import UIKit
 @MainActor protocol ItemsListViewOutput: AnyObject {
     init(itemsListRepository: ItemsListRepositoryContract, router: ItemsListViewRouting)
     func viewShown()
-    func showItemDetails(at indexPath: IndexPath)
 }
 
 // MARK: - Router
 @MainActor protocol ItemsListViewRouting: BaseRouterContract {
-    func showItemDetails(withId itemId: Int?)
+    func showItemDetails(withId itemId: String?)
 }
 
