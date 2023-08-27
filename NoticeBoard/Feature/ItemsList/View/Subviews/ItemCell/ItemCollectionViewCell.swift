@@ -129,10 +129,10 @@ class ItemCollectionViewCell: NBCollectionViewCell {
     private func setupContentConstraints(downscaleForState: StateForDownscale, isDownscale: Bool) {
         
         if isDownscale {
-            contentTopConstraint?.constant = 10
-            contentLeadingConstraint?.constant = 10
-            contentTrailingConstraint?.constant = -10
-            contentBottomConstraint?.constant = -10
+            contentTopConstraint?.constant = 5
+            contentLeadingConstraint?.constant = 5
+            contentTrailingConstraint?.constant = -5
+            contentBottomConstraint?.constant = -5
         } else {
             contentTopConstraint?.constant = 0
             contentLeadingConstraint?.constant = 0
@@ -140,7 +140,7 @@ class ItemCollectionViewCell: NBCollectionViewCell {
             contentBottomConstraint?.constant = 0
         }
         
-        UIView.animate(withDuration: 0.2, delay: 0) { [weak self] in
+        UIView.animate(withDuration: 0.15, delay: 0) { [weak self] in
             self?.layoutIfNeeded()
         } completion: { [weak self] isComplete in
             if isComplete && isDownscale && downscaleForState == .selected {
