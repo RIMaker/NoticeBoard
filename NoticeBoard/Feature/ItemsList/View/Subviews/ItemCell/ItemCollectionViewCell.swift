@@ -96,10 +96,11 @@ class ItemCollectionViewCell: NBCollectionViewCell {
             vStack.topAnchor.constraint(equalTo: contentView.topAnchor),
             vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             vStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            titleLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor)
         ])
         
-        titleLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor).isActive = true
     }
     
     required init?(coder: NSCoder) {
