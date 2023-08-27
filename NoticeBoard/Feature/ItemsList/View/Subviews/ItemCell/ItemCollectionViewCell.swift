@@ -61,7 +61,7 @@ class ItemCollectionViewCell: NBCollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.image = UIImage.imagePlaceholder
+        imageView.image = NBImage.imagePlaceholder
         imageView.cancelImageLoad()
     }
     
@@ -75,7 +75,7 @@ class ItemCollectionViewCell: NBCollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = ViewConstants.imageViewCornerRadius
         imageView.clipsToBounds = true
-        imageView.image = UIImage.imagePlaceholder
+        imageView.image = NBImage.imagePlaceholder
         
         titleLabel.numberOfLines = ViewConstants.titleLabelNumberOfLines
         titleLabel.font = .systemFont(ofSize: ViewConstants.titleLabelFontSize)

@@ -11,7 +11,7 @@ final class ItemDetailsViewController: NBViewController {
     
     var output: ItemDetailsViewOutput?
     
-    private lazy var collectionView = NBCollectionView()
+    private lazy var itemDetailsView = NBItemDetailsView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,16 +21,16 @@ final class ItemDetailsViewController: NBViewController {
     
     private func setupViews() {
         title = Constants.ItemDetailsViewController.title
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(collectionView)
+        itemDetailsView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(itemDetailsView)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            itemDetailsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            itemDetailsView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            itemDetailsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            itemDetailsView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
@@ -39,18 +39,13 @@ final class ItemDetailsViewController: NBViewController {
 //MARK: ItemDetailsViewInput
 extension ItemDetailsViewController: ItemDetailsViewInput {
     
-    var onTopRefresh: (() -> ())? {
-        get { collectionView.onTopRefresh }
-        set { collectionView.onTopRefresh = newValue }
-    }
-    
     func setup() {
         setupViews()
         setupConstraints()
     }
     
-    func display(models: [NBCollectionViewModel]) {
-        collectionView.display(models: models)
+    func display(model: NBItemDetailsViewModel) {
+        itemDetailsView.update(with: model)
     }
  
 }

@@ -10,9 +10,8 @@ import UIKit
 // MARK: - View
 @MainActor protocol ItemDetailsViewInput: AnyObject {
     var state: NBViewControllerState { get set }
-    var onTopRefresh: (() -> ())? { get set }
     func setup()
-    func display(models: [NBCollectionViewModel])
+    func display(model: NBItemDetailsViewModel) 
 }
 
 // MARK: - Presenter

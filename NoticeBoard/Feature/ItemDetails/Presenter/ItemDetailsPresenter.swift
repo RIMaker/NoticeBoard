@@ -24,9 +24,6 @@ final class ItemDetailsPresenter: ItemDetailsViewOutput {
     
     func viewShown() {
         input?.setup()
-        input?.onTopRefresh = { [weak self] in
-            self?.fetchAdvertisementDetails()
-        }
         
         fetchAdvertisementDetails()
     }
@@ -45,20 +42,19 @@ final class ItemDetailsPresenter: ItemDetailsViewOutput {
     }
     
     private func handleAdvertisementsLoading(_ response: AdvertisementDetails) {
-        let models = [
-            NBCollectionViewModel(
-                data: ItemCellData(
-                    title: response.title,
-                    price: response.price,
-                    location: response.location,
-                    imageUrl: response.imageUrl,
-                    createdDate: response.createdDate
-                ),
-                cellType: ItemCollectionViewCell.self
-            )
-        ]
+        let model = NBItemDetailsViewModel(data: NBItemDetailsViewModelDataImpl(
+            title: response.title,
+            price: response.price,
+            location: response.location,
+            imageUrl: response.imageUrl,
+            createdDate: response.createdDate,
+            description: response.description,
+            email: response.email,
+            phoneNumber: response.phoneNumber,
+            address: response.address
+        ))
         input?.state = .content
-        input?.display(models: models)
+        input?.display(model: model)
     }
     
     private func handleAdvertisementsLoading(_ error: NetworkError) {
