@@ -15,11 +15,6 @@ class ItemCollectionViewCell: NBCollectionViewCell {
     private let locationLabel = UILabel()
     private let dateLabel = UILabel()
     
-    private var contentTopConstraint: NSLayoutConstraint?
-    private var contentBottomConstraint: NSLayoutConstraint?
-    private var contentLeadingConstraint: NSLayoutConstraint?
-    private var contentTrailingConstraint: NSLayoutConstraint?
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
                 
@@ -97,15 +92,13 @@ class ItemCollectionViewCell: NBCollectionViewCell {
         vStack.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        contentTopConstraint = vStack.topAnchor.constraint(equalTo: contentView.topAnchor)
-        contentLeadingConstraint = vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
-        contentTrailingConstraint = vStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        contentBottomConstraint = vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        NSLayoutConstraint.activate([
+            vStack.topAnchor.constraint(equalTo: contentView.topAnchor),
+            vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            vStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
         
-        contentTopConstraint?.isActive = true
-        contentLeadingConstraint?.isActive = true
-        contentTrailingConstraint?.isActive = true
-        contentBottomConstraint?.isActive = true
         titleLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor).isActive = true
     }
     
