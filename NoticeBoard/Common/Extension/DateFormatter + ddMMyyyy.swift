@@ -1,5 +1,5 @@
 //
-//  DateFormatter + ddMMMMyyyy.swift
+//  DateFormatter + ddMMyyyy.swift
 //  NoticeBoard
 //
 //  Created by Zhora Agadzhanyan on 27.08.2023.
