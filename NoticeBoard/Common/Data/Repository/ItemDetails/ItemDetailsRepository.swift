@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol ItemDetailsRepositoryContract {
-    func getAdvertisementDetails(itemId: String?, completion: @escaping (Result<AdvertisementDetails?, NetworkError>)->Void)
+protocol ItemDetailsRepositoryContract: AnyObject {
+    func getAdvertisementDetails(itemId: String?, completion: @escaping (Result<AdvertisementDetails, NetworkError>)->Void)
 }
 
 final class ItemDetailsRepositoryImpl: BaseRpository, ItemDetailsRepositoryContract {
     
-    func getAdvertisementDetails(itemId: String?, completion: @escaping (Result<AdvertisementDetails?, NetworkError>)->Void) {
+    func getAdvertisementDetails(itemId: String?, completion: @escaping (Result<AdvertisementDetails, NetworkError>)->Void) {
         guard let itemId else {
             completion(.failure(.cantBuildUrlFromRequest))
             return

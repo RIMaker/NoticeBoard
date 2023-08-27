@@ -16,7 +16,9 @@ final class DecodingNetworkResponseConverterImpl<Response>: NetworkResponseConve
     }()
     
     init(decoder: JSONDecoder? = nil) {
-        self.decoder = decoder
+        if let decoder {
+            self.decoder = decoder
+        }
     }
     
     func decodeResponse(from data: Data) -> Response? {

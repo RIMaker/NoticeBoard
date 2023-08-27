@@ -39,6 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             NSAttributedString.Key.foregroundColor: NBColor.NavigationBar.textColor,
         ]
         UINavigationBar.appearance().titleTextAttributes = navigationBarTitleAttributes
+        UINavigationBar.appearance().barTintColor = NBColor.NavigationBar.backgroundColor
     }
 
 

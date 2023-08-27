@@ -12,15 +12,20 @@ enum NBColor {
     //MARK: NBMain
     enum NBMain {
         static var backgroundColor: UIColor {
-            UIColor.secondarySystemBackground
+            UIColor.white
         }
     }
     
     //MARK: NavigationBar
     enum NavigationBar {
         static var textColor: UIColor {
-            UIColor.secondarySystemBackground
+            UIColor.black
         }
+        
+        static var backgroundColor: UIColor {
+            UIColor.white
+        }
+        
     }
     
     //MARK: NBActivityIndicator
@@ -51,11 +56,11 @@ enum NBColor {
         
         enum Button {
             static var textColor: UIColor {
-                UIColor.black
+                UIColor.white
             }
             
             static var backgroundColor: UIColor {
-                UIColor.black.withAlphaComponent(0.2)
+                UIColor(red: 23 / 255, green: 156 / 255, blue: 224 / 255, alpha: 1)
             }
         }
         
@@ -64,7 +69,7 @@ enum NBColor {
         }
         
         static var backgroundColor: UIColor {
-            UIColor.white
+            UIColor.white.withAlphaComponent(0.95)
         }
         
         

@@ -9,14 +9,16 @@ import UIKit
 
 // MARK: - View
 @MainActor protocol ItemsListViewInput: AnyObject {
+    var state: NBViewControllerState { get set }
+    var onTopRefresh: (() -> ())? { get set }
     func setup()
-    func refreshViews()
+    func display(models: [NBCollectionViewModel])
 }
 
 // MARK: - Presenter
-protocol ItemsListViewOutput: AnyObject {
+@MainActor protocol ItemsListViewOutput: AnyObject {
     init(itemsListRepository: ItemsListRepositoryContract, router: ItemsListViewRouting)
-    @MainActor func viewShown()
+    func viewShown()
     func showItemDetails(at indexPath: IndexPath)
 }
 
