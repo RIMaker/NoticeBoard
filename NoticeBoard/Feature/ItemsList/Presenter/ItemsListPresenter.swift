@@ -48,7 +48,6 @@ final class ItemsListPresenter: ItemsListViewOutput {
     private func handleAdvertisementsLoading(_ response: [Advertisement]) {
         let models = response.map {
             NBCollectionViewModel(
-                id: "\($0)",
                 data: ItemCellData(
                     title: $0.title,
                     price: $0.price,

@@ -60,7 +60,6 @@ class NBCollectionView: UIView {
     }
     
     func display(models: [NBCollectionViewModel]) {
-        guard self.models != models else { return }
         
         self.models = models
         DispatchQueue.main.async { [weak self] in
