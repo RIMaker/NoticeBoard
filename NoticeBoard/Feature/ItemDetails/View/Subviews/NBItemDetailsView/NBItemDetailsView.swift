@@ -10,6 +10,7 @@ import UIKit
 final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
     
     var showAddressOnMapHandler: ((_ address: String?) -> Void)?
+    var callPhoneNumberHandler: ((_ phoneNumber: String?) -> Void)?
     
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
@@ -51,10 +52,12 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
             self.descriptionView.update(with: DescriptionViewModel(data: DescriptionViewModelDataImpl(
                 description: data.description
             )))
+            self.emailView.contactByHandler = data.textToEmailHandler
             self.emailView.update(with: ContactViewModel(data: ContactViewModelDataImpl(
                 contact: data.email,
                 type: .email
             )))
+            self.phoneNumberView.contactByHandler = data.callPhoneNumberHandler
             self.phoneNumberView.update(with: ContactViewModel(data: ContactViewModelDataImpl(
                 contact: data.phoneNumber,
                 type: .phone

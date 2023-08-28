@@ -45,6 +45,10 @@ final class ItemDetailsPresenter: ItemDetailsViewOutput {
         let model = NBItemDetailsViewModel(data: NBItemDetailsViewModelDataImpl(
             showAddressOnMapHandler: { [weak self] address in
                 self?.showAddressOnMap(address)
+            }, callPhoneNumberHandler: { [weak self] phoneNumber in
+                self?.callPhoneNumber(phoneNumber)
+            }, textToEmailHandler: { [weak self] email in
+                self?.textToEmail(email)
             },
             title: response.title,
             price: response.price,
@@ -78,6 +82,26 @@ final class ItemDetailsPresenter: ItemDetailsViewOutput {
             self.input?.state = .error(error: .cantBuildUrlFromRequest)
         }
         
+    }
+    
+    private func callPhoneNumber(_ phoneNumber: String?) {
+        guard let phoneNumber else { return }
+        
+        if let url = URL(string: "tel://\(phoneNumber.filter{ $0 != " " })") {
+            router.openUrl(url)
+        } else {
+            self.input?.state = .error(error: .cantBuildUrlFromRequest)
+        }
+    }
+    
+    private func textToEmail(_ email: String?) {
+        guard let email else { return }
+        
+        if let url = URL(string: "mailto:\(email)") {
+            router.openUrl(url)
+        } else {
+            self.input?.state = .error(error: .cantBuildUrlFromRequest)
+        }
     }
     
 }

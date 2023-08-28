@@ -9,6 +9,8 @@ import UIKit
 
 final class ContactView: UIView, ContactViewInput {
     
+    var contactByHandler: ((_ contact: String?) -> Void)?
+    
     private let contactLabel = UILabel()
     private let imageView = UIImageView()
     
@@ -46,6 +48,10 @@ final class ContactView: UIView, ContactViewInput {
         
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .white
+        
+        isUserInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedOnContactView))
+        addGestureRecognizer(tapGestureRecognizer)
     }
     
     private func setupConstraints() {
@@ -76,6 +82,11 @@ final class ContactView: UIView, ContactViewInput {
             imageView.heightAnchor.constraint(equalToConstant: ViewConstants.imageViewSize)
         ])
         
+    }
+    
+    @objc
+    private func tappedOnContactView(_ sender: UITapGestureRecognizer) {
+        contactByHandler?(contactLabel.text)
     }
     
     required init?(coder: NSCoder) {

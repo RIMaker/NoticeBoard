@@ -9,6 +9,8 @@ import Foundation
 
 struct NBItemDetailsViewModelDataImpl: NBItemDetailsViewModelData {
     let showAddressOnMapHandler: ((_ address: String?) -> Void)?
+    let callPhoneNumberHandler: ((_ phoneNumber: String?) -> Void)?
+    let textToEmailHandler: ((_ phoneNumber: String?) -> Void)?
     let title: String?
     let price: String?
     let location: String?
