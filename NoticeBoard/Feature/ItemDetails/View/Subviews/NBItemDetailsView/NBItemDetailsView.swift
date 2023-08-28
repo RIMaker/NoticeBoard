@@ -95,10 +95,6 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
         contentView.layer.cornerRadius = ViewConstants.contentViewCornerRadius
         contentView.clipsToBounds = true
         
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = NBImage.imagePlaceholder
-        imageView.clipsToBounds = true
-        
         titleLabel.numberOfLines = ViewConstants.titleLabelNumberOfLines
         titleLabel.font = .boldSystemFont(ofSize: ViewConstants.titleLabelFontSize)
         titleLabel.textColor = .white
@@ -110,6 +106,13 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
         dateLabel.numberOfLines = ViewConstants.dateLabelNumberOfLines
         dateLabel.font = .systemFont(ofSize: ViewConstants.dateLabelFontSize)
         dateLabel.textColor = .gray
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = NBImage.imagePlaceholder
+        imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        imageView.addGestureRecognizer(tapGestureRecognizer)
         
     }
     
@@ -187,6 +190,26 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
             emailView.widthAnchor.constraint(equalTo: vStack.widthAnchor)
         ])
         
+    }
+    
+    @objc
+    private func imageTapped(_ sender: UITapGestureRecognizer) {
+        guard let imageView = sender.view as? UIImageView else { return }
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.frame = bounds
+        newImageView.backgroundColor = .black
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        newImageView.addGestureRecognizer(tap)
+        addSubview(newImageView)
+        
+    }
+
+    @objc
+    private func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        guard let imageView = sender.view as? UIImageView else { return }
+        imageView.removeFromSuperview()
     }
     
     required init?(coder: NSCoder) {
