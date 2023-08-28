@@ -131,12 +131,6 @@ extension NBViewController {
                     }
                 )
             ))
-        case .noData:
-            showViewControllerPlaceholder(with: .init(
-                title: Constants.noDataTitle,
-                button: nil
-                )
-            )
         default:
             showViewControllerPlaceholder(with: .init(
                 title: Constants.defaultErrorTitle,
