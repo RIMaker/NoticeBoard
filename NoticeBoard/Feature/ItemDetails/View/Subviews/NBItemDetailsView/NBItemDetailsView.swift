@@ -18,8 +18,8 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
     private let addressView = AddressView()
     private let dateLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private let emailLabel = UILabel()
-    private let phoneNumberLabel = UILabel()
+    private let emailView = ContactView()
+    private let phoneNumberView = ContactView()
     
     private var imageViewHeightConstraint: NSLayoutConstraint?
     
@@ -40,8 +40,14 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
             self.titleLabel.text = data.title
             self.priceLabel.text = data.price
             self.descriptionLabel.text = data.description
-            self.emailLabel.text = data.email
-            self.phoneNumberLabel.text = data.phoneNumber
+            self.emailView.update(with: ContactViewModel(data: ContactViewModelDataImpl(
+                contact: data.email,
+                type: .email
+            )))
+            self.phoneNumberView.update(with: ContactViewModel(data: ContactViewModelDataImpl(
+                contact: data.phoneNumber,
+                type: .phone
+            )))
             self.addressView.update(with: AddressViewModel(
                 data: AddressViewModelDataImpl(
                     location: data.location,
@@ -86,14 +92,6 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
         descriptionLabel.font = .systemFont(ofSize: ViewConstants.descriptionLabelFontSize)
         descriptionLabel.textColor = .black
         
-        emailLabel.numberOfLines = ViewConstants.emailLabelNumberOfLines
-        emailLabel.font = .systemFont(ofSize: ViewConstants.emailLabelFontSize)
-        emailLabel.textColor = .black
-        
-        phoneNumberLabel.numberOfLines = ViewConstants.phoneNumberLabelNumberOfLines
-        phoneNumberLabel.font = .systemFont(ofSize: ViewConstants.phoneNumberLabelFontSize)
-        phoneNumberLabel.textColor = .black
-        
     }
     
     override func layoutSubviews() {
@@ -107,8 +105,8 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
         let vStack = UIStackView(arrangedSubviews: [
             priceLabel,
             addressView,
-            phoneNumberLabel,
-            emailLabel,
+            phoneNumberView,
+            emailView,
             descriptionLabel,
             dateLabel,
         ])
@@ -128,6 +126,8 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         vStack.translatesAutoresizingMaskIntoConstraints = false
+        phoneNumberView.translatesAutoresizingMaskIntoConstraints = false
+        emailView.translatesAutoresizingMaskIntoConstraints = false
         
         imageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 200)
         imageViewHeightConstraint?.isActive = true
@@ -156,7 +156,11 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
             vStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             vStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
+            vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+            
+            phoneNumberView.widthAnchor.constraint(equalTo: vStack.widthAnchor),
+            
+            emailView.widthAnchor.constraint(equalTo: vStack.widthAnchor)
         ])
         
     }
