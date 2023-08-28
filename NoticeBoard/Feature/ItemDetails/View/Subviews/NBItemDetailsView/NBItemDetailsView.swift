@@ -202,14 +202,19 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
         newImageView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
         newImageView.addGestureRecognizer(tap)
-        addSubview(newImageView)
+        UIView.transition(with: self, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+            self.addSubview(newImageView)
+        }, completion: nil)
         
     }
 
     @objc
     private func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
         guard let imageView = sender.view as? UIImageView else { return }
-        imageView.removeFromSuperview()
+        UIView.transition(with: self, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+            imageView.removeFromSuperview()
+        }, completion: nil)
+        
     }
     
     required init?(coder: NSCoder) {
