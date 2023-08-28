@@ -53,7 +53,7 @@ final class AddressView: UIView, AddressViewInput {
             addressLabel,
             showOnMapButton
         ])
-        vStack.spacing = 4
+        vStack.spacing = 2
         vStack.distribution = .fill
         vStack.alignment = .leading
         vStack.axis = .vertical
