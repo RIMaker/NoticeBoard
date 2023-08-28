@@ -32,6 +32,8 @@ final class AddressView: UIView, AddressViewInput {
     }
     
     private func setupViews() {
+        backgroundColor = NBColor.NBMain.backgroundColor
+        
         addressLabel.numberOfLines = ViewConstants.addressLabelNumberOfLines
         addressLabel.font = .systemFont(ofSize: ViewConstants.addressLabelFontSize)
         addressLabel.textColor = .black

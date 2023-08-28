@@ -65,6 +65,10 @@
 		7CCFB1612A9D1C1400D2F29C /* ContactViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFB1602A9D1C1400D2F29C /* ContactViewInput.swift */; };
 		7CCFB1632A9D1C2800D2F29C /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFB1622A9D1C2800D2F29C /* ContactViewModel.swift */; };
 		7CCFB1652A9D1C4800D2F29C /* ContactViewModelDataImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFB1642A9D1C4800D2F29C /* ContactViewModelDataImpl.swift */; };
+		7CCFB1682A9D26D400D2F29C /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFB1672A9D26D400D2F29C /* DescriptionView.swift */; };
+		7CCFB16A2A9D26E300D2F29C /* DescriptionViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFB1692A9D26E300D2F29C /* DescriptionViewInput.swift */; };
+		7CCFB16C2A9D26EE00D2F29C /* DescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFB16B2A9D26EE00D2F29C /* DescriptionViewModel.swift */; };
+		7CCFB16E2A9D26FB00D2F29C /* DescriptionViewModelDataImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFB16D2A9D26FB00D2F29C /* DescriptionViewModelDataImpl.swift */; };
 		7CEB56FE2A97EC2C00D520FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB56FD2A97EC2C00D520FF /* AppDelegate.swift */; };
 		7CEB57002A97EC2C00D520FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEB56FF2A97EC2C00D520FF /* SceneDelegate.swift */; };
 		7CEB57072A97EC2D00D520FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CEB57062A97EC2D00D520FF /* Assets.xcassets */; };
@@ -130,6 +134,10 @@
 		7CCFB1602A9D1C1400D2F29C /* ContactViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewInput.swift; sourceTree = "<group>"; };
 		7CCFB1622A9D1C2800D2F29C /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		7CCFB1642A9D1C4800D2F29C /* ContactViewModelDataImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModelDataImpl.swift; sourceTree = "<group>"; };
+		7CCFB1672A9D26D400D2F29C /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
+		7CCFB1692A9D26E300D2F29C /* DescriptionViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewInput.swift; sourceTree = "<group>"; };
+		7CCFB16B2A9D26EE00D2F29C /* DescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewModel.swift; sourceTree = "<group>"; };
+		7CCFB16D2A9D26FB00D2F29C /* DescriptionViewModelDataImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewModelDataImpl.swift; sourceTree = "<group>"; };
 		7CEB56FA2A97EC2C00D520FF /* NoticeBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoticeBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CEB56FD2A97EC2C00D520FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CEB56FF2A97EC2C00D520FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +160,7 @@
 		7C01695F2A9BE83A00DEF05F /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				7CCFB1662A9D26B300D2F29C /* DescriptionView */,
 				7CCFB15D2A9D1BDA00D2F29C /* ContactView */,
 				7C01696C2A9C026100DEF05F /* AddressView */,
 				7C0169662A9BEB0E00DEF05F /* NBItemDetailsView */,
@@ -544,6 +553,17 @@
 			path = ContactView;
 			sourceTree = "<group>";
 		};
+		7CCFB1662A9D26B300D2F29C /* DescriptionView */ = {
+			isa = PBXGroup;
+			children = (
+				7CCFB1672A9D26D400D2F29C /* DescriptionView.swift */,
+				7CCFB1692A9D26E300D2F29C /* DescriptionViewInput.swift */,
+				7CCFB16B2A9D26EE00D2F29C /* DescriptionViewModel.swift */,
+				7CCFB16D2A9D26FB00D2F29C /* DescriptionViewModelDataImpl.swift */,
+			);
+			path = DescriptionView;
+			sourceTree = "<group>";
+		};
 		7CEB56F12A97EC2C00D520FF = {
 			isa = PBXGroup;
 			children = (
@@ -666,18 +686,21 @@
 				7C0169612A9BE89300DEF05F /* NBItemDetailsView.swift in Sources */,
 				7C90FAF02A97FF3C00E5BE62 /* NBViewController.swift in Sources */,
 				7C90FABF2A97F24300E5BE62 /* FeatureFactory.swift in Sources */,
+				7CCFB1682A9D26D400D2F29C /* DescriptionView.swift in Sources */,
 				7C70780C2A9B34BA001CB151 /* UIImageLoader.swift in Sources */,
 				7C6CFB362A9A81AC00F24156 /* NBCollectionViewCellInput.swift in Sources */,
 				7C6CFB092A9A181000F24156 /* AdvertisementDetails.swift in Sources */,
 				7C90FACF2A97F3F200E5BE62 /* ItemsListRouter.swift in Sources */,
 				7CCFB1652A9D1C4800D2F29C /* ContactViewModelDataImpl.swift in Sources */,
 				7C6CFB342A9A816400F24156 /* NBCollectionViewModel.swift in Sources */,
+				7CCFB16C2A9D26EE00D2F29C /* DescriptionViewModel.swift in Sources */,
 				7C6CFB192A9A213000F24156 /* DecodingNetworkResponseConverterImpl.swift in Sources */,
 				7CCFB1612A9D1C1400D2F29C /* ContactViewInput.swift in Sources */,
 				7C0169722A9C02F200DEF05F /* AddressViewModel.swift in Sources */,
 				7C0169742A9C031600DEF05F /* AddressViewModelDataImpl.swift in Sources */,
 				7C6CFB322A9A7D1D00F24156 /* NBCollectionView.swift in Sources */,
 				7C90FAE62A97FBAD00E5BE62 /* ItemsListRepository.swift in Sources */,
+				7CCFB16A2A9D26E300D2F29C /* DescriptionViewInput.swift in Sources */,
 				7C6CFB152A9A1F6600F24156 /* NetworkResponseConverterContract.swift in Sources */,
 				7C6CFB0E2A9A1E7300F24156 /* RequestBuilder.swift in Sources */,
 				7C0169652A9BEA5700DEF05F /* NBItemDetailsViewInput.swift in Sources */,
@@ -699,6 +722,7 @@
 				7C7078102A9B718F001CB151 /* DateFormatter + yyyMMdd.swift in Sources */,
 				7C70780A2A9B3456001CB151 /* UIImageView + load.swift in Sources */,
 				7C90FAEA2A97FBCD00E5BE62 /* BaseRouterContract.swift in Sources */,
+				7CCFB16E2A9D26FB00D2F29C /* DescriptionViewModelDataImpl.swift in Sources */,
 				7C6CFB3C2A9A895D00F24156 /* ItemCellData.swift in Sources */,
 				7C6CFB102A9A1EC600F24156 /* NetworkRequestContract.swift in Sources */,
 			);

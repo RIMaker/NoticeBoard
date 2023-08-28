@@ -17,7 +17,7 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
     private let priceLabel = UILabel()
     private let addressView = AddressView()
     private let dateLabel = UILabel()
-    private let descriptionLabel = UILabel()
+    private let descriptionView = DescriptionView()
     private let emailView = ContactView()
     private let phoneNumberView = ContactView()
     
@@ -39,7 +39,9 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
         DispatchQueue.main.async {
             self.titleLabel.text = data.title
             self.priceLabel.text = data.price
-            self.descriptionLabel.text = data.description
+            self.descriptionView.update(with: DescriptionViewModel(data: DescriptionViewModelDataImpl(
+                description: data.description
+            )))
             self.emailView.update(with: ContactViewModel(data: ContactViewModelDataImpl(
                 contact: data.email,
                 type: .email
@@ -62,11 +64,13 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
                 self.dateLabel.text = "-"
                 return
             }
-            self.dateLabel.text = DateFormatter.ddMMyyyy.string(from: createdDate)
+            self.dateLabel.text = "Создано \n\(DateFormatter.ddMMyyyy.string(from: createdDate))"
         }
     }
     
     private func setupViews() {
+        backgroundColor = NBColor.NBMain.backgroundColor
+        
         scrollView.backgroundColor = NBColor.NBMain.backgroundColor
         contentView.backgroundColor = NBColor.NBMain.backgroundColor
         contentView.layer.cornerRadius = ViewConstants.contentViewCornerRadius
@@ -86,11 +90,7 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
         
         dateLabel.numberOfLines = ViewConstants.dateLabelNumberOfLines
         dateLabel.font = .systemFont(ofSize: ViewConstants.dateLabelFontSize)
-        dateLabel.textColor = .black
-        
-        descriptionLabel.numberOfLines = ViewConstants.descriptionLabelNumberOfLines
-        descriptionLabel.font = .systemFont(ofSize: ViewConstants.descriptionLabelFontSize)
-        descriptionLabel.textColor = .black
+        dateLabel.textColor = .gray
         
     }
     
@@ -107,13 +107,17 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
             addressView,
             phoneNumberView,
             emailView,
-            descriptionLabel,
+            descriptionView,
             dateLabel,
         ])
         vStack.spacing = 20
         vStack.distribution = .fill
         vStack.alignment = .leading
         vStack.axis = .vertical
+        
+        vStack.setCustomSpacing(8, after: phoneNumberView)
+        vStack.setCustomSpacing(25, after: emailView)
+        vStack.setCustomSpacing(25, after: descriptionView)
         
         addSubview(scrollView)
         scrollView.addSubview(imageView)
@@ -175,15 +179,9 @@ fileprivate enum ViewConstants {
     static let titleLabelNumberOfLines: Int = 0
     static let priceLabelNumberOfLines: Int = 0
     static let dateLabelNumberOfLines: Int = 0
-    static let descriptionLabelNumberOfLines: Int = 0
-    static let emailLabelNumberOfLines: Int = 0
-    static let phoneNumberLabelNumberOfLines: Int = 0
     static let titleLabelFontSize: CGFloat = 24
     static let priceLabelFontSize: CGFloat = 24
-    static let dateLabelFontSize: CGFloat = 14
-    static let descriptionLabelFontSize: CGFloat = 14
-    static let emailLabelFontSize: CGFloat = 14
-    static let phoneNumberLabelFontSize: CGFloat = 14
+    static let dateLabelFontSize: CGFloat = 12
     static let imageViewHeightScale: CGFloat = 12 / 27
     static let contentViewCornerRadius: CGFloat = 8
 }

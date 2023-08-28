@@ -38,7 +38,7 @@ final class ContactView: UIView, ContactViewInput {
     private func setupViews() {
         layer.cornerRadius = 8
         clipsToBounds = true
-        backgroundColor = .white
+        backgroundColor = NBColor.NBMain.backgroundColor
         
         contactLabel.numberOfLines = ViewConstants.contactLabelNumberOfLines
         contactLabel.font = .boldSystemFont(ofSize: ViewConstants.contactLabelFontSize)
