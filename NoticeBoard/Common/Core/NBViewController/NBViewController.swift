@@ -120,32 +120,19 @@ extension NBViewController {
     }
     
     private func showViewControllerPlaceholder(error: NetworkError, onTap: (() -> Void)?) {
+        var button = onTap == nil ? nil: NBViewControllerPlaceholderModel.Button(title: Constants.tryAgainTitle, onTap: {
+            onTap?()
+        })
         switch error {
         case .noInternetConnection, .timedOut:
             showViewControllerPlaceholder(with: .init(
                 title: Constants.noInternetConnectionTitle,
-                button: .init(
-                    title: Constants.tryAgainTitle,
-                    onTap: {
-                        onTap?()
-                    }
-                )
+                button: button
             ))
-        case .noData:
-            showViewControllerPlaceholder(with: .init(
-                title: Constants.noDataTitle,
-                button: nil
-                )
-            )
         default:
             showViewControllerPlaceholder(with: .init(
                 title: Constants.defaultErrorTitle,
-                button: .init(
-                    title: Constants.tryAgainTitle,
-                    onTap: {
-                        onTap?()
-                    }
-                )
+                button: button
             ))
         }
     }

@@ -9,8 +9,8 @@ import UIKit
 
 final class ItemsListRouter: BaseRouter, ItemsListViewRouting {
     
-    func showItemDetails(withId itemId: Int?) {
-        
+    func showItemDetails(withId itemId: String?) {
+        route(to: .itemDetails(itemId: itemId))
     }
 
 }

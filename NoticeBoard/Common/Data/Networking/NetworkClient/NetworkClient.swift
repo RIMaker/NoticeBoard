@@ -55,10 +55,7 @@ class NetworkClientImpl: NetworkClientContract {
         completion: @escaping (Result<Converter.Response, NetworkError>) -> Void
     ) {
         session.dataTask(with: urlRequest) { [weak self] (data, response, error) in
-            guard let data = data else {
-                completion(.failure(.noData))
-                return
-            }
+            
             if let error {
                 switch (error as? URLError)?.code {
                 case .some(.notConnectedToInternet):
@@ -72,6 +69,11 @@ class NetworkClientImpl: NetworkClientContract {
             }
             if let httpStatus = response as? HTTPURLResponse, !(200...299).contains(httpStatus.statusCode) {
                 completion(.failure(.networkError))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(.noData))
                 return
             }
             

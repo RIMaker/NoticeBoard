@@ -26,6 +26,10 @@ enum NBColor {
             UIColor.white
         }
         
+        static var tintColor: UIColor {
+            UIColor.black
+        }
+        
     }
     
     //MARK: NBActivityIndicator

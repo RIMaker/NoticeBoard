@@ -40,6 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         ]
         UINavigationBar.appearance().titleTextAttributes = navigationBarTitleAttributes
         UINavigationBar.appearance().barTintColor = NBColor.NavigationBar.backgroundColor
+        UINavigationBar.appearance().tintColor = NBColor.NavigationBar.tintColor
     }
 
 

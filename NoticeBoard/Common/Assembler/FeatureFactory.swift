@@ -10,6 +10,7 @@ import UIKit
 enum ScreenIdentifier {
     case splash
     case main
+    case itemDetails(itemId: String?)
 }
 
 
@@ -25,6 +26,8 @@ class FeatureFactoryImpl: FeatureFactory {
             return makeSplashScreen()
         case .main:
             return makeMainScreen()
+        case .itemDetails(let itemId):
+            return makeItemDetailsScreen(itemId: itemId)
         }
     }
 }
@@ -55,8 +58,26 @@ extension FeatureFactoryImpl {
         
         let navController = UINavigationController(rootViewController: itemsListVC)
         navController.navigationBar.prefersLargeTitles = false
+        itemsListVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         return navController
+    }
+    
+    private func makeItemDetailsScreen(itemId: String?) -> UIViewController {
+        let itemDetailsVC = ItemDetailsViewController()
+        let router: ItemDetailsViewRouting = ItemDetailsRouter(
+            featureFactory: self,
+            viewController: itemDetailsVC
+        )
+        let presenter = ItemDetailsPresenter(
+            itemId: itemId,
+            itemDetailsRepository: ItemDetailsRepositoryImpl(),
+            router: router
+        )
+        presenter.input = itemDetailsVC
+        itemDetailsVC.output = presenter
+        
+        return itemDetailsVC
     }
     
 }

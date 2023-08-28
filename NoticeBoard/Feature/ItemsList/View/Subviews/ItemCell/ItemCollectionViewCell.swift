@@ -9,28 +9,11 @@ import UIKit
 
 class ItemCollectionViewCell: NBCollectionViewCell {
     
-    override var isHighlighted: Bool {
-        didSet {
-            setupContentConstraints(isDownscale: isHighlighted)
-        }
-    }
-    
-    override var isSelected: Bool {
-        didSet {
-            setupContentConstraints(isDownscale: isSelected)
-        }
-    }
-    
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()
     private let locationLabel = UILabel()
     private let dateLabel = UILabel()
-    
-    private var contentTopConstraint: NSLayoutConstraint?
-    private var contentBottomConstraint: NSLayoutConstraint?
-    private var contentLeadingConstraint: NSLayoutConstraint?
-    private var contentTrailingConstraint: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,7 +44,7 @@ class ItemCollectionViewCell: NBCollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.image = UIImage.imagePlaceholder
+        imageView.image = NBImage.imagePlaceholder
         imageView.cancelImageLoad()
     }
     
@@ -75,7 +58,7 @@ class ItemCollectionViewCell: NBCollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = ViewConstants.imageViewCornerRadius
         imageView.clipsToBounds = true
-        imageView.image = UIImage.imagePlaceholder
+        imageView.image = NBImage.imagePlaceholder
         
         titleLabel.numberOfLines = ViewConstants.titleLabelNumberOfLines
         titleLabel.font = .systemFont(ofSize: ViewConstants.titleLabelFontSize)
@@ -109,36 +92,15 @@ class ItemCollectionViewCell: NBCollectionViewCell {
         vStack.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        contentTopConstraint = vStack.topAnchor.constraint(equalTo: contentView.topAnchor)
-        contentLeadingConstraint = vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
-        contentTrailingConstraint = vStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        contentBottomConstraint = vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        NSLayoutConstraint.activate([
+            vStack.topAnchor.constraint(equalTo: contentView.topAnchor),
+            vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            vStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            titleLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor)
+        ])
         
-        contentTopConstraint?.isActive = true
-        contentLeadingConstraint?.isActive = true
-        contentTrailingConstraint?.isActive = true
-        contentBottomConstraint?.isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor).isActive = true
-    }
-    
-    private func setupContentConstraints(isDownscale: Bool) {
-        
-        if isDownscale {
-            contentTopConstraint?.constant = 5
-            contentLeadingConstraint?.constant = 5
-            contentTrailingConstraint?.constant = -5
-            contentBottomConstraint?.constant = -5
-        } else {
-            contentTopConstraint?.constant = 0
-            contentLeadingConstraint?.constant = 0
-            contentTrailingConstraint?.constant = 0
-            contentBottomConstraint?.constant = 0
-        }
-        
-        UIView.animate(withDuration: 0.15, delay: 0) { [weak self] in
-            self?.layoutIfNeeded()
-        }
-
     }
     
     required init?(coder: NSCoder) {
