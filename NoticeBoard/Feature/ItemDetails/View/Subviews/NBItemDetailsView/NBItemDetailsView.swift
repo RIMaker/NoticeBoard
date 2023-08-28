@@ -9,6 +9,8 @@ import UIKit
 
 final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
     
+    var showAddressOnMapHandler: ((_ address: String?) -> Void)?
+    
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
     
@@ -16,10 +18,11 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()
     private let addressView = AddressView()
-    private let dateLabel = UILabel()
-    private let descriptionView = DescriptionView()
     private let emailView = ContactView()
     private let phoneNumberView = ContactView()
+    private let descriptionView = DescriptionView()
+    private let dateLabel = UILabel()
+   
     
     private var imageViewHeightConstraint: NSLayoutConstraint?
     
@@ -37,6 +40,12 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
             imageView.loadImage(at: imageUrl)
         }
         DispatchQueue.main.async {
+            self.addressView.isHidden = data.address == nil
+            self.emailView.isHidden = data.email == nil
+            self.phoneNumberView.isHidden = data.phoneNumber == nil
+            self.descriptionView.isHidden = data.description == nil
+            self.dateLabel.isHidden = data.createdDate == nil
+            
             self.titleLabel.text = data.title
             self.priceLabel.text = data.price
             self.descriptionView.update(with: DescriptionViewModel(data: DescriptionViewModelDataImpl(
@@ -50,6 +59,7 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
                 contact: data.phoneNumber,
                 type: .phone
             )))
+            self.addressView.showAddressOnMapHandler = data.showAddressOnMapHandler
             self.addressView.update(with: AddressViewModel(
                 data: AddressViewModelDataImpl(
                     location: data.location,
@@ -69,6 +79,12 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
     }
     
     private func setupViews() {
+        addressView.isHidden = true
+        emailView.isHidden = true
+        phoneNumberView.isHidden = true
+        descriptionView.isHidden = true
+        dateLabel.isHidden = true
+        
         backgroundColor = NBColor.NBMain.backgroundColor
         
         scrollView.backgroundColor = NBColor.NBMain.backgroundColor
@@ -161,6 +177,7 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
             vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             vStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+            vStack.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
             
             phoneNumberView.widthAnchor.constraint(equalTo: vStack.widthAnchor),
             

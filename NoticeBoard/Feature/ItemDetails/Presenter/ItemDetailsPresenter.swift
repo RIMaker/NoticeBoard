@@ -43,6 +43,9 @@ final class ItemDetailsPresenter: ItemDetailsViewOutput {
     
     private func handleAdvertisementsLoading(_ response: AdvertisementDetails) {
         let model = NBItemDetailsViewModel(data: NBItemDetailsViewModelDataImpl(
+            showAddressOnMapHandler: { [weak self] address in
+                self?.showAddressOnMap(address)
+            },
             title: response.title,
             price: response.price,
             location: response.location,
@@ -61,6 +64,18 @@ final class ItemDetailsPresenter: ItemDetailsViewOutput {
         
         input?.state = .error(error: error) { [weak self] in
             self?.fetchAdvertisementDetails()
+        }
+        
+    }
+    
+    private func showAddressOnMap(_ address: String?) {
+        guard let address else { return }
+        
+        let path = "http://maps.apple.com/?q=\(address)".encodeUrl
+        if let url = URL(string: path) {
+            router.openUrl(url)
+        } else {
+            self.input?.state = .error(error: .cantBuildUrlFromRequest)
         }
         
     }

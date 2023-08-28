@@ -8,6 +8,7 @@
 import Foundation
 
 struct NBItemDetailsViewModelDataImpl: NBItemDetailsViewModelData {
+    let showAddressOnMapHandler: ((_ address: String?) -> Void)?
     let title: String?
     let price: String?
     let location: String?

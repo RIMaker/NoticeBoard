@@ -22,5 +22,5 @@ import UIKit
 
 // MARK: - Router
 @MainActor protocol ItemDetailsViewRouting: BaseRouterContract {
-    
+    func openUrl(_ url: URL)
 }

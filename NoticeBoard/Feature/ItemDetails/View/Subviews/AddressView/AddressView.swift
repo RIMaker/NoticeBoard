@@ -9,8 +9,10 @@ import UIKit
 
 final class AddressView: UIView, AddressViewInput {
     
+    var showAddressOnMapHandler: ((_ address: String?) -> Void)?
+    
     private let addressLabel = UILabel()
-    private let showOnMapLabel = UILabel()
+    private let showOnMapButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,16 +40,18 @@ final class AddressView: UIView, AddressViewInput {
         addressLabel.font = .systemFont(ofSize: ViewConstants.addressLabelFontSize)
         addressLabel.textColor = .black
         
-        showOnMapLabel.numberOfLines = ViewConstants.showOnMapLabelNumberOfLines
-        showOnMapLabel.font = .systemFont(ofSize: ViewConstants.showOnMapLabelFontSize)
-        showOnMapLabel.textColor = .systemBlue
-        showOnMapLabel.text = ViewConstants.showOnMapLabelTitle
+        showOnMapButton.setTitle(ViewConstants.showOnMapButtonTitle, for: .normal)
+        showOnMapButton.setTitleColor(UIColor.systemBlue, for: .normal)
+        showOnMapButton.setTitleColor(UIColor.systemBlue.withAlphaComponent(0.6), for: .highlighted)
+        showOnMapButton.titleLabel?.font = .systemFont(ofSize: ViewConstants.showOnMapButtonFontSize)
+        
+        showOnMapButton.addTarget(self, action: #selector(showOnMapButtonTapped), for: .touchUpInside)
     }
     
     private func setupConstraints() {
         let vStack = UIStackView(arrangedSubviews: [
             addressLabel,
-            showOnMapLabel
+            showOnMapButton
         ])
         vStack.spacing = 4
         vStack.distribution = .fill
@@ -67,6 +71,11 @@ final class AddressView: UIView, AddressViewInput {
         
     }
     
+    @objc
+    private func showOnMapButtonTapped(_ sender: UIButton) {
+        showAddressOnMapHandler?(addressLabel.text)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -75,7 +84,6 @@ final class AddressView: UIView, AddressViewInput {
 fileprivate enum ViewConstants {
     static let addressLabelNumberOfLines: Int = 0
     static let addressLabelFontSize: CGFloat = 14
-    static let showOnMapLabelNumberOfLines: Int = 0
-    static let showOnMapLabelFontSize: CGFloat = 14
-    static let showOnMapLabelTitle = "Показать на карте"
+    static let showOnMapButtonFontSize: CGFloat = 14
+    static let showOnMapButtonTitle = "Показать на карте"
 }
