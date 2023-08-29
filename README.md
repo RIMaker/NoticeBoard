@@ -43,7 +43,7 @@
 - Работа с сетью, обработка потери сети / отсутствия соединения имплементировано в классе `NetworkClientImpl` (см. `NoticeBoard/Common/Data/Networking/NetworkClient/NetworkClient.swift`)
 - Для конфигурации экранов используется паттерн `Factory` в классе `FeatureFactoryImpl` (см. `NoticeBoard/Common/Assembler/FeatureFactory.swift`)
 - Для переходов между экранами используется слой `Router`
-- Работа с многопоточностью происходит через `DispatchQueue`
+- Работа с многопоточностью происходит через `GCD`
 
 # Демонстрация работы приложения
 
