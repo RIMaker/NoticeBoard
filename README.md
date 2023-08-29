@@ -51,4 +51,4 @@
 https://github.com/RIMaker/NoticeBoard/assets/35456855/a45deb0a-b02a-44cc-b241-7bdee80a67ca
 
 ### Случаи потери соединения:
-https://github.com/RIMaker/NoticeBoard/assets/35456855/faffe985-0473-4574-888f-e3a51252d39c
+https://github.com/RIMaker/NoticeBoard/assets/35456855/af64533b-ed2e-4405-b246-40574b16c513
