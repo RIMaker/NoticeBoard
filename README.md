@@ -38,7 +38,7 @@
 # Реализация
 - Для отображения списка на главном экране используется `UICollectionView` (см. `NoticeBoard/Common/Core/NBCollectionView`)
 - На экране с детальной информацией используется `UIScrollView`
-- У каждого экрана есть свойство состояние, которое наследуется от суперкласса `NBViewController` (см. `NoticeBoard/Common/Core/NBViewController/NBViewController.swift`)
+- У каждого экрана есть свойство `state`, которое наследуется от суперкласса `NBViewController` (см. `NoticeBoard/Common/Core/NBViewController/NBViewController.swift`)
 - Для загрузки изображений используется класс `UIImageLoader` (см. `NoticeBoard/Common/Util/UIImageLoader.swift`), который сжимает загруженные изображения с помощью метода класса `UIImage` - `jpegData(compressionQuality:)` и кэширует их в `NSCache`
 - Работа с сетью, обработка потери сети / отсутствия соединения имплементировано в классе `NetworkClientImpl` (см. `NoticeBoard/Common/Data/Networking/NetworkClient/NetworkClient.swift`)
 - Для конфигурации экранов используется паттерн `Factory` в классе `FeatureFactoryImpl` (см. `NoticeBoard/Common/Assembler/FeatureFactory.swift`)
