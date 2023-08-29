@@ -11,7 +11,7 @@ protocol ItemsListRepositoryContract: AnyObject {
     func getAdvertisements(completion: @escaping (Result<[Advertisement], NetworkError>)->Void)
 }
 
-final class ItemsListRepositoryImpl: BaseRpository, ItemsListRepositoryContract {
+final class ItemsListRepositoryImpl: BaseRepository, ItemsListRepositoryContract {
     
     func getAdvertisements(completion: @escaping (Result<[Advertisement], NetworkError>)->Void) {
         networkClient.send(request: API.AdvertisementsRequest()) { result in

@@ -11,7 +11,7 @@ protocol ItemDetailsRepositoryContract: AnyObject {
     func getAdvertisementDetails(itemId: String?, completion: @escaping (Result<AdvertisementDetails, NetworkError>)->Void)
 }
 
-final class ItemDetailsRepositoryImpl: BaseRpository, ItemDetailsRepositoryContract {
+final class ItemDetailsRepositoryImpl: BaseRepository, ItemDetailsRepositoryContract {
     
     func getAdvertisementDetails(itemId: String?, completion: @escaping (Result<AdvertisementDetails, NetworkError>)->Void) {
         guard let itemId else {

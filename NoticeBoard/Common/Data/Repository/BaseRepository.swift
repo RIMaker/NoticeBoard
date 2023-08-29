@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BaseRpository {
+class BaseRepository {
     
     var networkClient: NetworkClientContract
     
