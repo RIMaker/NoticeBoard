@@ -36,6 +36,7 @@
 4. Для запроса данных используется URLSession.
 
 # Реализация
+- `iOS 14+`
 - Для отображения списка на главном экране используется `UICollectionView` (см. `NoticeBoard/Common/Core/NBCollectionView`)
 - На экране с детальной информацией используется `UIScrollView`
 - У каждого экрана есть свойство `state`, которое наследуется от суперкласса `NBViewController` (см. `NoticeBoard/Common/Core/NBViewController/NBViewController.swift`)
