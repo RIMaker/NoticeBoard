@@ -24,6 +24,9 @@ final class ItemDetailsPresenter: ItemDetailsViewOutput {
     
     func viewShown() {
         input?.setup()
+        input?.onTopRefresh = { [weak self] in
+            self?.fetchAdvertisementDetails()
+        }
         
         fetchAdvertisementDetails()
     }

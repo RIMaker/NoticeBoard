@@ -39,6 +39,11 @@ final class ItemDetailsViewController: NBViewController {
 //MARK: ItemDetailsViewInput
 extension ItemDetailsViewController: ItemDetailsViewInput {
     
+    var onTopRefresh: (() -> ())? {
+        get { itemDetailsView.onTopRefresh }
+        set { itemDetailsView.onTopRefresh = newValue }
+    }
+    
     func setup() {
         setupViews()
         setupConstraints()

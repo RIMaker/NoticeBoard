@@ -9,11 +9,13 @@ import UIKit
 
 final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
     
+    var onTopRefresh: (() -> ())?
     var showAddressOnMapHandler: ((_ address: String?) -> Void)?
     var callPhoneNumberHandler: ((_ phoneNumber: String?) -> Void)?
     
     private lazy var scrollView = UIScrollView()
     private lazy var contentView = UIView()
+    private lazy var refreshControl = UIRefreshControl()
     
     private let imageView = NBGradientImageView(frame: .zero)
     private let titleLabel = UILabel()
@@ -41,6 +43,7 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
             imageView.loadImage(at: imageUrl)
         }
         DispatchQueue.main.async {
+            self.priceLabel.isHidden = data.price == nil
             self.addressView.isHidden = data.address == nil
             self.emailView.isHidden = data.email == nil
             self.phoneNumberView.isHidden = data.phoneNumber == nil
@@ -82,6 +85,7 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
     }
     
     private func setupViews() {
+        priceLabel.isHidden = true
         addressView.isHidden = true
         emailView.isHidden = true
         phoneNumberView.isHidden = true
@@ -90,7 +94,11 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
         
         backgroundColor = NBColor.NBMain.backgroundColor
         
+        scrollView.alwaysBounceVertical = true
+        scrollView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(onTopRefresh(_:)), for: .valueChanged)
         scrollView.backgroundColor = NBColor.NBMain.backgroundColor
+        
         contentView.backgroundColor = NBColor.NBMain.backgroundColor
         contentView.layer.cornerRadius = ViewConstants.contentViewCornerRadius
         contentView.clipsToBounds = true
@@ -192,6 +200,12 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
         
     }
     
+    private func endRefreshing() {
+        DispatchQueue.main.async { [weak self] in
+            self?.refreshControl.endRefreshing()
+        }
+    }
+    
     @objc
     private func imageTapped(_ sender: UITapGestureRecognizer) {
         guard let imageView = sender.view as? UIImageView else { return }
@@ -215,6 +229,12 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
             imageView.removeFromSuperview()
         }, completion: nil)
         
+    }
+    
+    @objc
+    private func onTopRefresh(_ sender: UIRefreshControl) {
+        endRefreshing()
+        onTopRefresh?()
     }
     
     required init?(coder: NSCoder) {
