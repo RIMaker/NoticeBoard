@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func setupAppearance() {
         let navigationBarTitleAttributes = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
             NSAttributedString.Key.foregroundColor: NBColor.NavigationBar.textColor,
         ]
         UINavigationBar.appearance().titleTextAttributes = navigationBarTitleAttributes
