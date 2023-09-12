@@ -7,7 +7,7 @@
 
 import Foundation
 
-@MainActor protocol BaseRouterContract: AnyObject {
+protocol BaseRouterContract: AnyObject {
     func route(to screenId: ScreenIdentifier)
     func dismiss()
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - View
-@MainActor protocol ItemsListViewInput: AnyObject {
+protocol ItemsListViewInput: AnyObject {
     var state: NBViewControllerState { get set }
     var onTopRefresh: (() -> ())? { get set }
     var didSelectItemAt: ((_ indexPath: IndexPath) -> ())? { get set }
@@ -17,13 +17,13 @@ import UIKit
 }
 
 // MARK: - Presenter
-@MainActor protocol ItemsListViewOutput: AnyObject {
+protocol ItemsListViewOutput: AnyObject {
     init(itemsListRepository: ItemsListRepositoryContract, router: ItemsListViewRouting)
     func viewShown()
 }
 
 // MARK: - Router
-@MainActor protocol ItemsListViewRouting: BaseRouterContract {
+protocol ItemsListViewRouting: BaseRouterContract {
     func showItemDetails(withId itemId: String?)
 }
 

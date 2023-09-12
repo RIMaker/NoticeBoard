@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - View
-@MainActor protocol ItemDetailsViewInput: AnyObject {
+protocol ItemDetailsViewInput: AnyObject {
     var state: NBViewControllerState { get set }
     var onTopRefresh: (() -> ())? { get set }
     func setup()
@@ -16,12 +16,12 @@ import UIKit
 }
 
 // MARK: - Presenter
-@MainActor protocol ItemDetailsViewOutput: AnyObject {
+protocol ItemDetailsViewOutput: AnyObject {
     init(itemId: String?, itemDetailsRepository: ItemDetailsRepositoryContract, router: ItemDetailsViewRouting)
     func viewShown()
 }
 
 // MARK: - Router
-@MainActor protocol ItemDetailsViewRouting: BaseRouterContract {
+protocol ItemDetailsViewRouting: BaseRouterContract {
     func openUrl(_ url: URL)
 }

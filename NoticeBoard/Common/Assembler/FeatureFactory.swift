@@ -14,7 +14,7 @@ enum ScreenIdentifier {
 }
 
 
-@MainActor protocol FeatureFactory: AnyObject {
+protocol FeatureFactory: AnyObject {
     func makeView(for screenIdentifier: ScreenIdentifier) -> UIViewController
 }
 
