@@ -64,10 +64,10 @@ fileprivate class ImageLoader {
             
             if
                 let data = data,
-                let image = UIImage(data: data),
-                let compressedData = image.jpeg(.lowest),
-                let compressedImage = UIImage(data: compressedData)
+                let image = UIImage(data: data)
             {
+                let compressedImage = image.scale(newWidth: 512)
+                
                 self?.loadedImages.setObject(compressedImage, forKey: cacheID)
                 completion(.success(compressedImage))
                 return
