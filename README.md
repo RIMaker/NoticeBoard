@@ -17,3 +17,8 @@
 - Для конфигурации экранов используется паттерн `Factory` в классе `FeatureFactoryImpl` (см. `NoticeBoard/Common/Assembler/FeatureFactory.swift`)
 - Для переходов между экранами используется слой `Router`
 - Работа с многопоточностью происходит через `GCD`
+
+# Скриншоты
+- <img src="https://github.com/RIMaker/NoticeBoard/assets/35456855/9e685ba3-ed0c-4fad-975d-48efb52a7746" width="300" /> <img src="https://github.com/RIMaker/NoticeBoard/assets/35456855/cd7714d1-5222-431a-a5b4-e728433b9b21" width="300" />
+- <img src="https://github.com/RIMaker/NoticeBoard/assets/35456855/a2e1b3b8-d682-4c33-9922-67782e4a8cfb" width="300" /> <img src="https://github.com/RIMaker/NoticeBoard/assets/35456855/82f65c7c-d233-457a-beb2-718fd1b986ff" width="300" /> 
+- <img src="https://github.com/RIMaker/NoticeBoard/assets/35456855/11b0fffb-61fc-42aa-bb5c-76eb0d87f69a" width="300" /> <img src="https://github.com/RIMaker/NoticeBoard/assets/35456855/eea7891d-aca5-4875-a685-1030602f90d6" width="300" />
