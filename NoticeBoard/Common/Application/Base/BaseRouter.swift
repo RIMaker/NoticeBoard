@@ -10,9 +10,9 @@ import UIKit
 class BaseRouter: NSObject, BaseRouterContract {
     
     var featureFactory: FeatureFactory
-    weak var viewController: UIViewController?
+    weak var viewController: NBViewController?
     
-    init(featureFactory: FeatureFactory, viewController: UIViewController) {
+    init(featureFactory: FeatureFactory, viewController: NBViewController) {
         self.featureFactory = featureFactory
         self.viewController = viewController
     }

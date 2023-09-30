@@ -37,14 +37,20 @@ class NetworkClientImpl: NetworkClientContract {
             ) { result in
                 switch result {
                 case .success(let response):
-                    completion(.success(response))
+                    DispatchQueue.main.async {
+                        completion(.success(response))
+                    }
                 case .failure(let error):
-                    completion(.failure(error))
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
                 }
             }
             
         case let .failure(error):
-            completion(.failure(error))
+            DispatchQueue.main.async {
+                completion(.failure(error))
+            }
             
         }
     }

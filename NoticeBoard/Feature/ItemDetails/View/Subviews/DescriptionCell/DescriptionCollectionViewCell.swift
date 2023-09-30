@@ -1,5 +1,5 @@
 //
-//  DescriptionView.swift
+//  DescriptionCollectionViewCell.swift
 //  NoticeBoard
 //
 //  Created by Zhora Agadzhanyan on 28.08.2023.
@@ -7,11 +7,10 @@
 
 import UIKit
 
-final class DescriptionView: NBView {
+final class DescriptionCollectionViewCell: NBCollectionViewCell {
     
     private let viewTitleLabel = UILabel()
     private let descriptionLabel = UILabel()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,16 +19,14 @@ final class DescriptionView: NBView {
         setupConstraints()
     }
     
-    func update(with model: NBViewModel) {
-        guard let data = model.data as? DescriptionViewData else { return }
+    func update(with data: NBCollectionViewCellData) {
+        guard let data = data as? DescriptionCellData else { return }
         
-        DispatchQueue.main.async {
-            self.descriptionLabel.text = data.description
-        }
+        self.descriptionLabel.text = data.description
     }
     
     private func setupViews() {
-        backgroundColor = NBColor.NBMain.backgroundColor
+        contentView.backgroundColor = NBColor.NBMain.backgroundColor
         
         viewTitleLabel.numberOfLines = ViewConstants.viewTitleLabelNumberOfLines
         viewTitleLabel.font = .boldSystemFont(ofSize: ViewConstants.viewTitleLabelFontSize)
@@ -51,15 +48,15 @@ final class DescriptionView: NBView {
         vStack.alignment = .leading
         vStack.axis = .vertical
         
-        addSubview(vStack)
+        contentView.addSubview(vStack)
         
         vStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            vStack.topAnchor.constraint(equalTo: topAnchor),
-            vStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            vStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            vStack.bottomAnchor.constraint(equalTo: bottomAnchor),
+            vStack.topAnchor.constraint(equalTo: contentView.topAnchor),
+            vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            vStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
         
     }

@@ -1,5 +1,5 @@
 //
-//  AddressView.swift
+//  AddressCollectionViewCell.swift
 //  NoticeBoard
 //
 //  Created by Zhora Agadzhanyan on 28.08.2023.
@@ -7,9 +7,7 @@
 
 import UIKit
 
-final class AddressView: NBView {
-    
-    var showAddressOnMapHandler: ((_ address: String?) -> Void)?
+final class AddressCollectionViewCell: NBCollectionViewCell {
     
     private let addressLabel = UILabel()
     private let showOnMapButton = UIButton()
@@ -21,20 +19,14 @@ final class AddressView: NBView {
         setupConstraints()
     }
     
-    func update(with model: NBViewModel) {
-        guard let data = model.data as? AddressViewData else { return }
+    func update(with data: NBCollectionViewCellData) {
+        guard let data = data as? AddressCellData else { return }
         
-        DispatchQueue.main.async {
-            var newAddress = data.location ?? ""
-            if let address = data.address {
-                newAddress += ", \(address)"
-            }
-            self.addressLabel.text = newAddress
-        }
+        self.addressLabel.text = data.address
     }
     
     private func setupViews() {
-        backgroundColor = NBColor.NBMain.backgroundColor
+        contentView.backgroundColor = NBColor.NBMain.backgroundColor
         
         addressLabel.numberOfLines = ViewConstants.addressLabelNumberOfLines
         addressLabel.font = .systemFont(ofSize: ViewConstants.addressLabelFontSize)
@@ -44,8 +36,6 @@ final class AddressView: NBView {
         showOnMapButton.setTitleColor(UIColor.systemBlue, for: .normal)
         showOnMapButton.setTitleColor(UIColor.systemBlue.withAlphaComponent(0.6), for: .highlighted)
         showOnMapButton.titleLabel?.font = .systemFont(ofSize: ViewConstants.showOnMapButtonFontSize)
-        
-        showOnMapButton.addTarget(self, action: #selector(showOnMapButtonTapped), for: .touchUpInside)
     }
     
     private func setupConstraints() {
@@ -58,22 +48,17 @@ final class AddressView: NBView {
         vStack.alignment = .leading
         vStack.axis = .vertical
         
-        addSubview(vStack)
+        contentView.addSubview(vStack)
         
         vStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            vStack.topAnchor.constraint(equalTo: topAnchor),
-            vStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            vStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            vStack.bottomAnchor.constraint(equalTo: bottomAnchor)
+            vStack.topAnchor.constraint(equalTo: contentView.topAnchor),
+            vStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            vStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
-    }
-    
-    @objc
-    private func showOnMapButtonTapped(_ sender: UIButton) {
-        showAddressOnMapHandler?(addressLabel.text)
     }
     
     required init?(coder: NSCoder) {

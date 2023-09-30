@@ -21,21 +21,28 @@ class NBCollectionView: UIView {
         return collView
     }()
     
-    
     private let spacing: CGFloat
     private let columns: Int
+    private let cellsScalingEffectIsEnable: Bool
     
-    init(spacing: CGFloat = 16, columns: Int = 1) {
+    init(
+        spacing: CGFloat = 16,
+        columns: Int = 1,
+        cellsScalingEffectIsEnable: Bool = true
+    ) {
         self.spacing = spacing
         self.columns = columns
+        self.cellsScalingEffectIsEnable = cellsScalingEffectIsEnable
         super.init(frame: .zero)
         
         addSubview(collectionView)
         setUpContent()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func display(models: [NBCollectionViewModel]) {
+        
+        self.models = models
+        self.collectionView.reloadData()
     }
     
     private func setUpContent() {
@@ -65,13 +72,13 @@ class NBCollectionView: UIView {
     private func setupCollectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0/CGFloat(columns)),
-            heightDimension: .fractionalHeight(1.0)
+            heightDimension: .estimated(30)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
  
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalWidth(0.7)
+            heightDimension: .estimated(30)
         )
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
@@ -94,18 +101,8 @@ class NBCollectionView: UIView {
 
     }
     
-    func display(models: [NBCollectionViewModel]) {
-        
-        self.models = models
-        DispatchQueue.main.async { [weak self] in
-            self?.collectionView.reloadData()
-        }
-    }
-    
     private func endRefreshing() {
-        DispatchQueue.main.async { [weak self] in
-            self?.refreshControl.endRefreshing()
-        }
+        self.refreshControl.endRefreshing()
     }
     
     private func cell(indexPath: IndexPath, model: NBCollectionViewModel) -> UICollectionViewCell {
@@ -129,6 +126,10 @@ class NBCollectionView: UIView {
         endRefreshing()
         onTopRefresh?()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 //MARK: UICollectionViewDelegate
@@ -147,7 +148,6 @@ extension NBCollectionView: UICollectionViewDelegate, UICollectionViewDataSource
         if let cell = cell as? NBCollectionViewCellInput {
             cell.update(with: model.data)
         }
-        
         return cell
     }
     
@@ -157,25 +157,27 @@ extension NBCollectionView: UICollectionViewDelegate, UICollectionViewDataSource
         
         didSelectItemAt?(indexPath)
         
-        cell.makeScale(0.95, 0.95, completion: {
-            cell.makeScale(1, 1)
-        })
+        if cellsScalingEffectIsEnable {
+            cell.makeScale(0.95, 0.95, completion: {
+                cell.makeScale(1, 1)
+            })
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        
-        cell.makeScale(0.95, 0.95)
-        
+        if cellsScalingEffectIsEnable {
+            guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+            
+            cell.makeScale(0.95, 0.95)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        
-        cell.makeScale(1, 1)
-        
+        if cellsScalingEffectIsEnable {
+            guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+            
+            cell.makeScale(1, 1)
+        }
     }
     
 }

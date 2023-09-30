@@ -76,7 +76,6 @@ enum NBColor {
             UIColor.white.withAlphaComponent(0.95)
         }
         
-        
     }
     
     

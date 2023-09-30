@@ -11,8 +11,10 @@ import UIKit
 protocol ItemDetailsViewInput: AnyObject {
     var state: NBViewControllerState { get set }
     var onTopRefresh: (() -> ())? { get set }
+    var didSelectItemAt: ((_ indexPath: IndexPath) -> ())? { get set }
     func setup()
-    func display(model: NBViewModel)
+    func display(models: [NBCollectionViewModel])
+    func displayImage(fromUrl url: URL?)
 }
 
 // MARK: - Presenter
@@ -23,5 +25,5 @@ protocol ItemDetailsViewOutput: AnyObject {
 
 // MARK: - Router
 protocol ItemDetailsViewRouting: BaseRouterContract {
-    func openUrl(_ url: URL)
+    func openUrl(fromPath path: String)
 }

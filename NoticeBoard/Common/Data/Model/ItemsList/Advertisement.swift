@@ -12,6 +12,6 @@ struct Advertisement: Decodable {
     let title: String?
     let price: String?
     let location: String?
-    let imageUrl: String?
-    let createdDate: String?
+    let imageUrl: URL?
+    let createdDate: Date?
 }

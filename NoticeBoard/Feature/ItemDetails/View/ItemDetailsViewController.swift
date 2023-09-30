@@ -11,10 +11,10 @@ final class ItemDetailsViewController: NBViewController {
     
     var output: ItemDetailsViewOutput?
     
-    private lazy var itemDetailsView = ItemDetailsView()
+    private lazy var collectionView = NBCollectionView(cellsScalingEffectIsEnable: false)
     
     override func loadView() {
-        view = itemDetailsView
+        view = collectionView
     }
 
     override func viewDidLoad() {
@@ -33,16 +33,21 @@ final class ItemDetailsViewController: NBViewController {
 extension ItemDetailsViewController: ItemDetailsViewInput {
     
     var onTopRefresh: (() -> ())? {
-        get { itemDetailsView.onTopRefresh }
-        set { itemDetailsView.onTopRefresh = newValue }
+        get { collectionView.onTopRefresh }
+        set { collectionView.onTopRefresh = newValue }
+    }
+    
+    var didSelectItemAt: ((_ indexPath: IndexPath) -> ())? {
+        get { collectionView.didSelectItemAt }
+        set { collectionView.didSelectItemAt = newValue }
     }
     
     func setup() {
         setupViews()
     }
     
-    func display(model: NBViewModel) {
-        itemDetailsView.update(with: model)
+    func display(models: [NBCollectionViewModel]) {
+        collectionView.display(models: models)
     }
  
 }

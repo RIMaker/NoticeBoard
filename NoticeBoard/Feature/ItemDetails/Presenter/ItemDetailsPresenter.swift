@@ -9,9 +9,21 @@ import Foundation
 
 final class ItemDetailsPresenter: ItemDetailsViewOutput {
     
+    enum InputCells: Int, CaseIterable {
+        case image
+        case title
+        case price
+        case address
+        case phone
+        case email
+        case description
+        case date
+    }
+    
     weak var input: ItemDetailsViewInput?
     
     private var itemId: String?
+    private var response: AdvertisementDetails?
     
     private let itemDetailsRepository: ItemDetailsRepositoryContract
     private let router: ItemDetailsViewRouting
@@ -26,6 +38,9 @@ final class ItemDetailsPresenter: ItemDetailsViewOutput {
         input?.setup()
         input?.onTopRefresh = { [weak self] in
             self?.fetchAdvertisementDetails()
+        }
+        input?.didSelectItemAt = { [weak self] indexPath in
+            self?.handleDidSelectItemAt(indexPath)
         }
         
         fetchAdvertisementDetails()
@@ -45,26 +60,60 @@ final class ItemDetailsPresenter: ItemDetailsViewOutput {
     }
     
     private func handleAdvertisementsLoading(_ response: AdvertisementDetails) {
-        let model = NBViewModel(data: ItemDetailsViewData(
-            showAddressOnMapHandler: { [weak self] address in
-                self?.showAddressOnMap(address)
-            }, callPhoneNumberHandler: { [weak self] phoneNumber in
-                self?.callPhoneNumber(phoneNumber)
-            }, textToEmailHandler: { [weak self] email in
-                self?.textToEmail(email)
-            },
-            title: response.title,
-            price: response.price,
-            location: response.location,
-            imageUrl: response.imageUrl,
-            createdDate: response.createdDate,
-            description: response.description,
-            email: response.email,
-            phoneNumber: response.phoneNumber,
-            address: response.address
-        ))
+        self.response = response
+        let cellModels = InputCells.allCases.map { cell in
+            switch cell {
+            case .image:
+                return NBCollectionViewModel(
+                    data: ImageCellData(imageUrl: response.imageUrl),
+                    cellType: ImageCollectionViewCell.self
+                )
+            case .title:
+                return NBCollectionViewModel(
+                    data: TextCellData(text: response.title, font: .bold, fontSize: 24, color: .black),
+                    cellType: TextCollectionViewCell.self
+                )
+            case .price:
+                return NBCollectionViewModel(
+                    data: TextCellData(text: response.price, font: .bold, fontSize: 24, color: .black),
+                    cellType: TextCollectionViewCell.self
+                )
+            case .address:
+                let address = setupAddress(fromResponse: response)
+                return NBCollectionViewModel(
+                    data: AddressCellData(address: address),
+                    cellType: AddressCollectionViewCell.self
+                )
+            case .phone:
+                return NBCollectionViewModel(
+                    data: ContactCellData(contact: response.phoneNumber, type: .phone),
+                    cellType: ContactCollectionViewCell.self
+                )
+            case .email:
+                return NBCollectionViewModel(
+                    data: ContactCellData(contact: response.email, type: .email),
+                    cellType: ContactCollectionViewCell.self
+                )
+            case .description:
+                return NBCollectionViewModel(
+                    data: DescriptionCellData(description: response.description),
+                    cellType: DescriptionCollectionViewCell.self
+                )
+            case .date:
+                let text: String
+                if let createdDate = response.createdDate {
+                    text = "Создано \n\(DateFormatter.ddMMyyyy.string(from: createdDate))"
+                } else {
+                    text = ""
+                }
+                return NBCollectionViewModel(
+                    data: TextCellData(text: text, font: .regular, fontSize: 12, color: .gray),
+                    cellType: TextCollectionViewCell.self
+                )
+            }
+        }
         input?.state = .content
-        input?.display(model: model)
+        input?.display(models: cellModels)
     }
     
     private func handleAdvertisementsLoading(_ error: NetworkError) {
@@ -75,36 +124,52 @@ final class ItemDetailsPresenter: ItemDetailsViewOutput {
         
     }
     
+    private func handleDidSelectItemAt(_ indexPath: IndexPath) {
+        guard let cell = InputCells(rawValue: indexPath.item) else { return }
+        
+        switch cell {
+        case .image:
+            input?.displayImage(fromUrl: response?.imageUrl)
+        case .address:
+            let address = setupAddress(fromResponse: response)
+            showAddressOnMap(address)
+        case .phone:
+            callPhoneNumber(response?.phoneNumber)
+        case .email:
+            textToEmail(response?.email)
+        default:
+            break
+        }
+    }
+    
+    private func setupAddress(fromResponse response: AdvertisementDetails?) -> String {
+        var newAddress = response?.location ?? ""
+        if let address = response?.address {
+            newAddress += ", \(address)"
+        }
+        return newAddress
+    }
+    
     private func showAddressOnMap(_ address: String?) {
         guard let address else { return }
         
         let path = "http://maps.apple.com/?q=\(address)".encodeUrl
-        if let url = URL(string: path) {
-            router.openUrl(url)
-        } else {
-            self.input?.state = .error(error: .cantBuildUrlFromRequest)
-        }
-        
+       
+        router.openUrl(fromPath: path)
     }
     
     private func callPhoneNumber(_ phoneNumber: String?) {
         guard let phoneNumber else { return }
         
-        if let url = URL(string: "tel://\(phoneNumber.filter{ $0 != " " })") {
-            router.openUrl(url)
-        } else {
-            self.input?.state = .error(error: .cantBuildUrlFromRequest)
-        }
+        let path = "tel://\(phoneNumber.filter{ $0 != " " })"
+        router.openUrl(fromPath: path)
     }
     
     private func textToEmail(_ email: String?) {
         guard let email else { return }
         
-        if let url = URL(string: "mailto:\(email)") {
-            router.openUrl(url)
-        } else {
-            self.input?.state = .error(error: .cantBuildUrlFromRequest)
-        }
+        let path = "mailto:\(email)"
+        router.openUrl(fromPath: path)
     }
     
 }

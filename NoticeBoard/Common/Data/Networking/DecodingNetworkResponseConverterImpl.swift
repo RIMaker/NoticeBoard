@@ -12,6 +12,7 @@ final class DecodingNetworkResponseConverterImpl<Response>: NetworkResponseConve
     private var decoder: JSONDecoder? = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyyMMdd)
         return decoder
     }()
     

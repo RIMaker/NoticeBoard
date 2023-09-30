@@ -1,5 +1,5 @@
 //
-//  ContactView.swift
+//  ContactCollectionViewCell.swift
 //  NoticeBoard
 //
 //  Created by Zhora Agadzhanyan on 28.08.2023.
@@ -7,9 +7,7 @@
 
 import UIKit
 
-final class ContactView: NBView {
-    
-    var contactByHandler: ((_ contact: String?) -> Void)?
+final class ContactCollectionViewCell: NBCollectionViewCell {
     
     private let contactLabel = UILabel()
     private let imageView = UIImageView()
@@ -21,26 +19,24 @@ final class ContactView: NBView {
         setupConstraints()
     }
     
-    func update(with model: NBViewModel) {
-        guard let data = model.data as? ContactViewData else { return }
+    func update(with data: NBCollectionViewCellData) {
+        guard let data = data as? ContactCellData else { return }
         
-        DispatchQueue.main.async {
-            self.contactLabel.text = data.contact
-            switch data.type {
-            case .email:
-                self.imageView.image = NBImage.emailIcon
-                self.backgroundColor = UIColor(red: 0 / 255, green: 192 / 255, blue: 255 / 255, alpha: 1)
-            case .phone:
-                self.imageView.image = NBImage.phoneIcon
-                self.backgroundColor = UIColor(red: 106 / 255, green: 188 / 255, blue: 75 / 255, alpha: 1)
-            }
+        self.contactLabel.text = data.contact
+        switch data.type {
+        case .email:
+            self.imageView.image = NBImage.emailIcon
+            self.contentView.backgroundColor = UIColor(red: 0 / 255, green: 192 / 255, blue: 255 / 255, alpha: 1)
+        case .phone:
+            self.imageView.image = NBImage.phoneIcon
+            self.contentView.backgroundColor = UIColor(red: 106 / 255, green: 188 / 255, blue: 75 / 255, alpha: 1)
         }
     }
     
     private func setupViews() {
-        layer.cornerRadius = 8
-        clipsToBounds = true
-        backgroundColor = NBColor.NBMain.backgroundColor
+        contentView.backgroundColor = NBColor.NBMain.backgroundColor
+        contentView.layer.cornerRadius = 8
+        contentView.clipsToBounds = true
         
         contactLabel.numberOfLines = ViewConstants.contactLabelNumberOfLines
         contactLabel.font = .boldSystemFont(ofSize: ViewConstants.contactLabelFontSize)
@@ -48,10 +44,6 @@ final class ContactView: NBView {
         
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .white
-        
-        isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tappedOnContactView))
-        addGestureRecognizer(tapGestureRecognizer)
     }
     
     private func setupConstraints() {
@@ -64,29 +56,22 @@ final class ContactView: NBView {
         hStack.alignment = .center
         hStack.axis = .horizontal
         
-        addSubview(hStack)
+        contentView.addSubview(hStack)
         
         hStack.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: ViewConstants.selfHeight),
-            
-            hStack.topAnchor.constraint(equalTo: topAnchor),
-            hStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            hStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            hStack.bottomAnchor.constraint(equalTo: bottomAnchor),
+            hStack.heightAnchor.constraint(equalToConstant: ViewConstants.selfHeight),
+            hStack.topAnchor.constraint(equalTo: contentView.topAnchor),
+            hStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            hStack.trailingAnchor.constraint(equalTo:contentView.trailingAnchor, constant: -12),
+            hStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             imageView.widthAnchor.constraint(equalToConstant: ViewConstants.imageViewSize),
             imageView.heightAnchor.constraint(equalToConstant: ViewConstants.imageViewSize)
         ])
         
-    }
-    
-    @objc
-    private func tappedOnContactView(_ sender: UITapGestureRecognizer) {
-        contactByHandler?(contactLabel.text)
     }
     
     required init?(coder: NSCoder) {

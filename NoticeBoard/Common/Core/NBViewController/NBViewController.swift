@@ -11,9 +11,7 @@ class NBViewController: UIViewController {
     
     var state: NBViewControllerState = .content {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-                self?.stateDidSet()
-            }
+            self.stateDidSet()
         }
     }
     
@@ -33,6 +31,22 @@ class NBViewController: UIViewController {
         hideActivityIndicator()
         hideViewControllerPlaceholder()
         setup()
+    }
+    
+    func displayImage(fromUrl url: URL?) {
+        guard let imageUrl = url else { return }
+        let imageView = UIImageView()
+        imageView.loadImage(at: imageUrl)
+        imageView.frame = view.bounds
+        imageView.backgroundColor = .black
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        imageView.addGestureRecognizer(tap)
+        UIView.transition(with: view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+            self.view.addSubview(imageView)
+        }, completion: nil)
+        
     }
     
     private func setup() {
@@ -80,26 +94,37 @@ class NBViewController: UIViewController {
             showActivityIndicator()
         }
     }
+
+    @objc
+    private func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        guard let imageView = sender.view as? UIImageView else { return }
+        UIView.transition(with: view, duration: 0.25, options: [.transitionCrossDissolve], animations: {
+            imageView.removeFromSuperview()
+        }, completion: nil)
+        
+    }
 }
 
-extension NBViewController {
+private extension NBViewController {
     
-    private func showActivityIndicator() {
+    func showActivityIndicator() {
         activityIndicator.view.isHidden = false
         activityIndicator.startAnimating()
         view.bringSubviewToFront(activityIndicator.view)
     }
     
-    private func hideActivityIndicator() {
+    func hideActivityIndicator() {
         activityIndicator.view.isHidden = true
         activityIndicator.stopAnimating()
         view.sendSubviewToBack(activityIndicator.view)
     }
+    
+    
 }
 
-extension NBViewController {
+private extension NBViewController {
     
-    private func showViewControllerPlaceholder(with model: NBViewControllerPlaceholderModel) {
+    func showViewControllerPlaceholder(with model: NBViewControllerPlaceholderModel) {
         var modelCopy = model
         if let modelOnTap = modelCopy.button?.onTap {
             modelCopy.button?.onTap = { [weak self] in
@@ -119,10 +144,13 @@ extension NBViewController {
         }
     }
     
-    private func showViewControllerPlaceholder(error: NetworkError, onTap: (() -> Void)?) {
-        var button = onTap == nil ? nil: NBViewControllerPlaceholderModel.Button(title: Constants.tryAgainTitle, onTap: {
-            onTap?()
-        })
+    func showViewControllerPlaceholder(error: NetworkError, onTap: (() -> Void)?) {
+        let button = onTap == nil ? nil: NBViewControllerPlaceholderModel.Button(
+            title: Constants.tryAgainTitle,
+            onTap: {
+                onTap?()
+            }
+        )
         switch error {
         case .noInternetConnection, .timedOut:
             showViewControllerPlaceholder(with: .init(
@@ -137,7 +165,7 @@ extension NBViewController {
         }
     }
     
-    private func hideViewControllerPlaceholder() {
+    func hideViewControllerPlaceholder() {
         viewControllerPlaceholder.view.isHidden = true
         view.sendSubviewToBack(viewControllerPlaceholder.view)
     }

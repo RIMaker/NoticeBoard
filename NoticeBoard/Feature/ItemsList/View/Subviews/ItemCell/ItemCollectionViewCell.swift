@@ -25,17 +25,14 @@ class ItemCollectionViewCell: NBCollectionViewCell {
     func update(with data: NBCollectionViewCellData) {
         guard let data = data as? ItemCellData else { return }
         
-        if let imageUrlString = data.imageUrl, let imageUrl = URL(string: imageUrlString)  {
+        if let imageUrl = data.imageUrl  {
             imageView.loadImage(at: imageUrl)
         }
         titleLabel.text = data.title
         priceLabel.text = data.price
         locationLabel.text = data.location
         
-        guard
-            let createdDateString = data.createdDate,
-            let createdDate = DateFormatter.yyyyMMdd.date(from: createdDateString)
-        else {
+        guard let createdDate = data.createdDate else {
             dateLabel.text = "-"
             return
         }
@@ -46,11 +43,6 @@ class ItemCollectionViewCell: NBCollectionViewCell {
         super.prepareForReuse()
         imageView.image = NBImage.imagePlaceholder
         imageView.cancelImageLoad()
-    }
-    
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        layoutAttributes.bounds.size.height = systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-        return layoutAttributes
     }
 
     private func setupViews() {
@@ -91,6 +83,7 @@ class ItemCollectionViewCell: NBCollectionViewCell {
         
         vStack.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             vStack.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -98,7 +91,9 @@ class ItemCollectionViewCell: NBCollectionViewCell {
             vStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            titleLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor)
+            titleLabel.widthAnchor.constraint(equalTo: vStack.widthAnchor),
+            
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor)
         ])
         
     }

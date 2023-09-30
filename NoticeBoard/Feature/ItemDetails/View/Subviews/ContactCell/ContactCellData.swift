@@ -1,5 +1,5 @@
 //
-//  ContactViewData.swift
+//  ContactCellData.swift
 //  NoticeBoard
 //
 //  Created by Zhora Agadzhanyan on 28.08.2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ContactViewData: NBViewData {
+struct ContactCellData: NBCollectionViewCellData {
     enum ContactType {
         case email
         case phone

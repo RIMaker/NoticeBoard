@@ -9,8 +9,12 @@ import UIKit
 
 final class ItemDetailsRouter: BaseRouter, ItemDetailsViewRouting {
     
-    func openUrl(_ url: URL) {
-        UIApplication.shared.open(url)
+    func openUrl(fromPath path: String) {
+        if let url = URL(string: path), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            self.viewController?.state = .error(error: .cantBuildUrlFromRequest)
+        }
     }
     
 }
