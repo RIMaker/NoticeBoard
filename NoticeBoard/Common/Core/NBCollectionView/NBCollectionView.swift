@@ -21,7 +21,13 @@ class NBCollectionView: UIView {
         return collView
     }()
     
-    init() {
+    
+    private let spacing: CGFloat
+    private let columns: Int
+    
+    init(spacing: CGFloat = 16, columns: Int = 1) {
+        self.spacing = spacing
+        self.columns = columns
         super.init(frame: .zero)
         
         addSubview(collectionView)
@@ -46,17 +52,45 @@ class NBCollectionView: UIView {
     }
     
     private func setupCollectionView() -> UICollectionView {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = ViewConstants.minimumLineSpacing
-        layout.minimumInteritemSpacing = ViewConstants.minimumInteritemSpacing
-        layout.sectionInset = ViewConstants.sectionInset
+        let layout = setupCollectionViewLayout()
         let colView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         colView.backgroundColor = NBColor.NBMain.backgroundColor
         colView.translatesAutoresizingMaskIntoConstraints = false
         colView.delegate = self
         colView.dataSource = self
         return colView
+
+    }
+    
+    private func setupCollectionViewLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0/CGFloat(columns)),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+ 
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalWidth(0.7)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitem: item,
+            count: columns
+        )
+        group.interItemSpacing = .fixed(spacing)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = spacing
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: spacing,
+            leading: spacing,
+            bottom: spacing,
+            trailing: spacing
+        )
+
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
 
     }
     
@@ -144,26 +178,4 @@ extension NBCollectionView: UICollectionViewDelegate, UICollectionViewDataSource
         
     }
     
-}
-
-extension NBCollectionView: UICollectionViewDelegateFlowLayout {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath
-    ) -> CGSize {
-        
-        let layout = collectionViewLayout as! UICollectionViewFlowLayout
-        let widthPerItem = (collectionView.frame.width - layout.minimumInteritemSpacing - layout.sectionInset.left - layout.sectionInset.right) / 2
-        let heightPerItem = collectionView.frame.height * ViewConstants.heightPerItemScale
-        
-        return CGSize(width: widthPerItem, height: heightPerItem)
-    }
-}
-
-fileprivate enum ViewConstants {
-    static let minimumLineSpacing: CGFloat = 16
-    static let minimumInteritemSpacing: CGFloat = 10
-    static let sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-    static let heightPerItemScale: CGFloat = 10 / 27
 }

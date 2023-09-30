@@ -11,7 +11,7 @@ final class ItemsListViewController: NBViewController {
     
     var output: ItemsListViewOutput?
     
-    private lazy var collectionView = NBCollectionView()
+    private lazy var collectionView = NBCollectionView(columns: 2)
     
     override func loadView() {
         view = collectionView
