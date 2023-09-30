@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
+final class ItemDetailsView: NBView {
     
     var onTopRefresh: (() -> ())?
     var showAddressOnMapHandler: ((_ address: String?) -> Void)?
@@ -36,8 +36,8 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
         setupConstraints()
     }
     
-    func update(with model: NBItemDetailsViewModel) {
-        guard let data = model.data as? NBItemDetailsViewModelDataImpl else { return }
+    func update(with model: NBViewModel) {
+        guard let data = model.data as? ItemDetailsViewData else { return }
         
         if let imageUrlString = data.imageUrl, let imageUrl = URL(string: imageUrlString) {
             imageView.loadImage(at: imageUrl)
@@ -52,22 +52,22 @@ final class NBItemDetailsView: UIView, NBItemDetailsViewInput {
             
             self.titleLabel.text = data.title
             self.priceLabel.text = data.price
-            self.descriptionView.update(with: DescriptionViewModel(data: DescriptionViewModelDataImpl(
+            self.descriptionView.update(with: NBViewModel(data: DescriptionViewData(
                 description: data.description
             )))
             self.emailView.contactByHandler = data.textToEmailHandler
-            self.emailView.update(with: ContactViewModel(data: ContactViewModelDataImpl(
+            self.emailView.update(with: NBViewModel(data: ContactViewData(
                 contact: data.email,
                 type: .email
             )))
             self.phoneNumberView.contactByHandler = data.callPhoneNumberHandler
-            self.phoneNumberView.update(with: ContactViewModel(data: ContactViewModelDataImpl(
+            self.phoneNumberView.update(with: NBViewModel(data: ContactViewData(
                 contact: data.phoneNumber,
                 type: .phone
             )))
             self.addressView.showAddressOnMapHandler = data.showAddressOnMapHandler
-            self.addressView.update(with: AddressViewModel(
-                data: AddressViewModelDataImpl(
+            self.addressView.update(with: NBViewModel(
+                data: AddressViewData(
                     location: data.location,
                     address: data.address
                 )

@@ -22,7 +22,7 @@ class ItemCollectionViewCell: NBCollectionViewCell {
         setupConstraints()
     }
     
-    func update(with data: NBCollectionViewModelData) {
+    func update(with data: NBCollectionViewCellData) {
         guard let data = data as? ItemCellData else { return }
         
         if let imageUrlString = data.imageUrl, let imageUrl = URL(string: imageUrlString)  {

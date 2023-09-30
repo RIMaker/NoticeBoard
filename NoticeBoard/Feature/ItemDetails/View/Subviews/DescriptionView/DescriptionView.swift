@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DescriptionView: UIView, DescriptionViewInput {
+final class DescriptionView: NBView {
     
     private let viewTitleLabel = UILabel()
     private let descriptionLabel = UILabel()
@@ -20,8 +20,8 @@ final class DescriptionView: UIView, DescriptionViewInput {
         setupConstraints()
     }
     
-    func update(with model: DescriptionViewModel) {
-        guard let data = model.data as? DescriptionViewModelDataImpl else { return }
+    func update(with model: NBViewModel) {
+        guard let data = model.data as? DescriptionViewData else { return }
         
         DispatchQueue.main.async {
             self.descriptionLabel.text = data.description

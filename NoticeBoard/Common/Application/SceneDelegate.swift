@@ -38,6 +38,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
             NSAttributedString.Key.foregroundColor: NBColor.NavigationBar.textColor,
         ]
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
         UINavigationBar.appearance().titleTextAttributes = navigationBarTitleAttributes
         UINavigationBar.appearance().barTintColor = NBColor.NavigationBar.backgroundColor
         UINavigationBar.appearance().tintColor = NBColor.NavigationBar.tintColor

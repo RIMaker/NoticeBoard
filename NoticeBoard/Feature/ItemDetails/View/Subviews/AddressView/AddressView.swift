@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AddressView: UIView, AddressViewInput {
+final class AddressView: NBView {
     
     var showAddressOnMapHandler: ((_ address: String?) -> Void)?
     
@@ -21,8 +21,8 @@ final class AddressView: UIView, AddressViewInput {
         setupConstraints()
     }
     
-    func update(with model: AddressViewModel) {
-        guard let data = model.data as? AddressViewModelDataImpl else { return }
+    func update(with model: NBViewModel) {
+        guard let data = model.data as? AddressViewData else { return }
         
         DispatchQueue.main.async {
             var newAddress = data.location ?? ""

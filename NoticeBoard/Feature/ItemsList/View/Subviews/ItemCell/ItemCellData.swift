@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ItemCellData: NBCollectionViewModelData {
+struct ItemCellData: NBCollectionViewCellData {
     let title: String?
     let price: String?
     let location: String?

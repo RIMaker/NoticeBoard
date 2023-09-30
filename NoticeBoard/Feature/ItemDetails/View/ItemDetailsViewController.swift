@@ -11,7 +11,11 @@ final class ItemDetailsViewController: NBViewController {
     
     var output: ItemDetailsViewOutput?
     
-    private lazy var itemDetailsView = NBItemDetailsView()
+    private lazy var itemDetailsView = ItemDetailsView()
+    
+    override func loadView() {
+        view = itemDetailsView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,17 +25,6 @@ final class ItemDetailsViewController: NBViewController {
     
     private func setupViews() {
         title = Constants.ItemDetailsViewController.title
-        itemDetailsView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(itemDetailsView)
-    }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            itemDetailsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            itemDetailsView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            itemDetailsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            itemDetailsView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
     }
     
 }
@@ -46,10 +39,9 @@ extension ItemDetailsViewController: ItemDetailsViewInput {
     
     func setup() {
         setupViews()
-        setupConstraints()
     }
     
-    func display(model: NBItemDetailsViewModel) {
+    func display(model: NBViewModel) {
         itemDetailsView.update(with: model)
     }
  
