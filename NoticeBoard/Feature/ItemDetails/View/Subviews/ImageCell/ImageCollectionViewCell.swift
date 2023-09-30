@@ -29,8 +29,8 @@ final class ImageCollectionViewCell: NBCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        imageView.image = NBImage.imagePlaceholder
         imageView.cancelImageLoad()
+        imageView.image = NBImage.imagePlaceholder
     }
     
     private func setupViews() {
