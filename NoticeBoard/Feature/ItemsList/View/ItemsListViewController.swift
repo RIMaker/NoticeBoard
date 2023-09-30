@@ -12,6 +12,10 @@ final class ItemsListViewController: NBViewController {
     var output: ItemsListViewOutput?
     
     private lazy var collectionView = NBCollectionView()
+    
+    override func loadView() {
+        view = collectionView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,17 +25,6 @@ final class ItemsListViewController: NBViewController {
     
     private func setupViews() {
         title = Constants.ItemsListViewController.title
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(collectionView)
-    }
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
     }
     
 }
@@ -51,7 +44,6 @@ extension ItemsListViewController: ItemsListViewInput {
     
     func setup() {
         setupViews()
-        setupConstraints()
     }
     
     func display(models: [NBCollectionViewModel]) {

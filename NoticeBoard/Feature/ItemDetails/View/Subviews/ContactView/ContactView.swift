@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ContactView: UIView, ContactViewInput {
+final class ContactView: NBView {
     
     var contactByHandler: ((_ contact: String?) -> Void)?
     
@@ -21,8 +21,8 @@ final class ContactView: UIView, ContactViewInput {
         setupConstraints()
     }
     
-    func update(with model: ContactViewModel) {
-        guard let data = model.data as? ContactViewModelDataImpl else { return }
+    func update(with model: NBViewModel) {
+        guard let data = model.data as? ContactViewData else { return }
         
         DispatchQueue.main.async {
             self.contactLabel.text = data.contact

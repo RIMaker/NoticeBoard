@@ -12,7 +12,7 @@ protocol ItemDetailsViewInput: AnyObject {
     var state: NBViewControllerState { get set }
     var onTopRefresh: (() -> ())? { get set }
     func setup()
-    func display(model: NBItemDetailsViewModel) 
+    func display(model: NBViewModel)
 }
 
 // MARK: - Presenter

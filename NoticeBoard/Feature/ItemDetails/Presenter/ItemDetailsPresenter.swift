@@ -45,7 +45,7 @@ final class ItemDetailsPresenter: ItemDetailsViewOutput {
     }
     
     private func handleAdvertisementsLoading(_ response: AdvertisementDetails) {
-        let model = NBItemDetailsViewModel(data: NBItemDetailsViewModelDataImpl(
+        let model = NBViewModel(data: ItemDetailsViewData(
             showAddressOnMapHandler: { [weak self] address in
                 self?.showAddressOnMap(address)
             }, callPhoneNumberHandler: { [weak self] phoneNumber in

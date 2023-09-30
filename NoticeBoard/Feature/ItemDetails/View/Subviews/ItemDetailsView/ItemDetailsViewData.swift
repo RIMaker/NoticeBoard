@@ -1,5 +1,5 @@
 //
-//  NBItemDetailsViewModelDataImpl.swift
+//  ItemDetailsViewData.swift
 //  NoticeBoard
 //
 //  Created by Zhora Agadzhanyan on 27.08.2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NBItemDetailsViewModelDataImpl: NBItemDetailsViewModelData {
+struct ItemDetailsViewData: NBViewData {
     let showAddressOnMapHandler: ((_ address: String?) -> Void)?
     let callPhoneNumberHandler: ((_ phoneNumber: String?) -> Void)?
     let textToEmailHandler: ((_ phoneNumber: String?) -> Void)?

@@ -11,7 +11,7 @@ typealias NBCollectionViewCell = UICollectionViewCell & NBCollectionViewCellInpu
 
 struct NBCollectionViewModel {
     
-    let data: NBCollectionViewModelData
+    let data: NBCollectionViewCellData
     let cellType: NBCollectionViewCell.Type
     var id: String {
         return String(describing: cellType)
@@ -19,4 +19,4 @@ struct NBCollectionViewModel {
     
 }
 
-protocol NBCollectionViewModelData {}
+protocol NBCollectionViewCellData {}
