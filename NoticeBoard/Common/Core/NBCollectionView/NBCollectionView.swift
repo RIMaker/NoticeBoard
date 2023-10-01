@@ -71,7 +71,7 @@ class NBCollectionView: UIView {
     
     private func setupCollectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0/CGFloat(columns)),
+            widthDimension: .fractionalWidth(1.0),
             heightDimension: .estimated(30)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
