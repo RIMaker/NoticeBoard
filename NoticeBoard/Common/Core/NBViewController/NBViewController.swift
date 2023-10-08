@@ -15,21 +15,25 @@ class NBViewController: UIViewController {
         }
     }
     
-    private lazy var activityIndicator: NBActivityIndicator = {
-        let indicator = NBActivityIndicator()
-        return indicator
+    lazy var contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = NBColor.NBMain.backgroundColor
+        return view
     }()
     
-    private lazy var viewControllerPlaceholder: NBViewControllerPlaceholder = {
-        let vcPlaceholder = NBViewControllerPlaceholder()
-        return vcPlaceholder
+    private lazy var loadingView: NBLoadingView = {
+        let view = NBLoadingView()
+        return view
+    }()
+    
+    private lazy var errorView: NBErrorView = {
+        let view = NBErrorView()
+        return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        hideActivityIndicator()
-        hideViewControllerPlaceholder()
         setup()
     }
     
@@ -51,47 +55,40 @@ class NBViewController: UIViewController {
     
     private func setup() {
         view.backgroundColor = NBColor.NBMain.backgroundColor
-        activityIndicator.view.translatesAutoresizingMaskIntoConstraints = false
-        viewControllerPlaceholder.view.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        errorView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(activityIndicator.view)
-        addChild(activityIndicator)
-        activityIndicator.didMove(toParent: self)
-        
-        view.addSubview(viewControllerPlaceholder.view)
-        addChild(viewControllerPlaceholder)
-        viewControllerPlaceholder.didMove(toParent: self)
+        view.addSubview(loadingView)
+        view.addSubview(errorView)
+        view.addSubview(contentView)
         
         NSLayoutConstraint.activate([
-            activityIndicator.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            activityIndicator.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            activityIndicator.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            activityIndicator.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            loadingView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            loadingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loadingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            viewControllerPlaceholder.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            viewControllerPlaceholder.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            viewControllerPlaceholder.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            viewControllerPlaceholder.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            errorView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            errorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            errorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            errorView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
     private func stateDidSet() {
         switch state {
         case .content:
-            hideActivityIndicator()
-            hideViewControllerPlaceholder()
-        case .error(let placeholderModel, let error, let onTap):
-            hideActivityIndicator()
-            if let placeholderModel {
-                showViewControllerPlaceholder(with: placeholderModel)
-            } else if let error {
-                showViewControllerPlaceholder(error: error, onTap: onTap)
-            } else {
-                hideViewControllerPlaceholder()
-            }
+            showContentView()
+        case .error(let error, let onTap):
+            showErrorView(error: error, onTap: onTap)
         case .loading:
-            hideViewControllerPlaceholder()
-            showActivityIndicator()
+            showLoadingView()
         }
     }
 
@@ -107,66 +104,53 @@ class NBViewController: UIViewController {
 
 private extension NBViewController {
     
-    func showActivityIndicator() {
-        activityIndicator.view.isHidden = false
-        activityIndicator.startAnimating()
-        view.bringSubviewToFront(activityIndicator.view)
+    func showLoadingView() {
+        view.bringSubviewToFront(loadingView)
     }
-    
-    func hideActivityIndicator() {
-        activityIndicator.view.isHidden = true
-        activityIndicator.stopAnimating()
-        view.sendSubviewToBack(activityIndicator.view)
-    }
-    
     
 }
 
 private extension NBViewController {
     
-    func showViewControllerPlaceholder(with model: NBViewControllerPlaceholderModel) {
-        var modelCopy = model
-        if let modelOnTap = modelCopy.button?.onTap {
-            modelCopy.button?.onTap = { [weak self] in
-                self?.hideViewControllerPlaceholder()
-                modelOnTap()
-            }
-        }
-        
-        viewControllerPlaceholder.update(with: modelCopy)
-        viewControllerPlaceholder.view.isHidden = false
-        view.bringSubviewToFront(viewControllerPlaceholder.view)
-        
-        if model.button == nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-                self?.state = .content
-            }
-        }
+    func showContentView() {
+        view.bringSubviewToFront(contentView)
     }
     
-    func showViewControllerPlaceholder(error: NetworkError, onTap: (() -> Void)?) {
-        let button = onTap == nil ? nil: NBViewControllerPlaceholderModel.Button(
+}
+
+private extension NBViewController {
+    
+    func showErrorView(error: NetworkError?, onTap: (() -> Void)?) {
+        let errorButton = onTap == nil ? nil: NBErrorViewData.Button(
             title: Constants.tryAgainTitle,
-            onTap: {
+            onTap: { [weak self] in
+                self?.showContentView()
                 onTap?()
             }
         )
+        let errorTitle: String
+        
         switch error {
         case .noInternetConnection, .timedOut:
-            showViewControllerPlaceholder(with: .init(
-                title: Constants.noInternetConnectionTitle,
-                button: button
-            ))
+            errorTitle = Constants.noInternetConnectionTitle
         default:
-            showViewControllerPlaceholder(with: .init(
-                title: Constants.defaultErrorTitle,
-                button: button
-            ))
+            errorTitle = Constants.defaultErrorTitle
+        }
+        let errorViewModel = NBViewModel(
+            data: NBErrorViewData(
+                title: errorTitle,
+                button: errorButton
+            )
+        )
+        
+        errorView.update(with: errorViewModel)
+        view.bringSubviewToFront(errorView)
+        
+        if errorButton == nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.showContentView()
+            }
         }
     }
     
-    func hideViewControllerPlaceholder() {
-        viewControllerPlaceholder.view.isHidden = true
-        view.sendSubviewToBack(viewControllerPlaceholder.view)
-    }
 }

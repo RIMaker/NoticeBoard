@@ -31,8 +31,8 @@
 		7C6CFB1C2A9A2D7700F24156 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB1B2A9A2D7700F24156 /* BaseRepository.swift */; };
 		7C6CFB1E2A9A2E9C00F24156 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB1D2A9A2E9C00F24156 /* API.swift */; };
 		7C6CFB242A9A3FD600F24156 /* ItemDetailsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB232A9A3FD600F24156 /* ItemDetailsRepository.swift */; };
-		7C6CFB262A9A496C00F24156 /* NBViewControllerPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB252A9A496C00F24156 /* NBViewControllerPlaceholder.swift */; };
-		7C6CFB2B2A9A4BF500F24156 /* NBViewControllerPlaceholderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB2A2A9A4BF500F24156 /* NBViewControllerPlaceholderModel.swift */; };
+		7C6CFB262A9A496C00F24156 /* NBErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB252A9A496C00F24156 /* NBErrorView.swift */; };
+		7C6CFB2B2A9A4BF500F24156 /* NBErrorViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB2A2A9A4BF500F24156 /* NBErrorViewData.swift */; };
 		7C6CFB2D2A9A61B800F24156 /* NBViewControllerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB2C2A9A61B800F24156 /* NBViewControllerState.swift */; };
 		7C6CFB2F2A9A6FCC00F24156 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB2E2A9A6FCC00F24156 /* Constants.swift */; };
 		7C6CFB322A9A7D1D00F24156 /* NBCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6CFB312A9A7D1D00F24156 /* NBCollectionView.swift */; };
@@ -55,7 +55,7 @@
 		7C90FAD72A97F43A00E5BE62 /* ItemDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FAD62A97F43A00E5BE62 /* ItemDetailsRouter.swift */; };
 		7C90FAD92A97F44500E5BE62 /* ItemDetailsContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FAD82A97F44500E5BE62 /* ItemDetailsContract.swift */; };
 		7C90FADC2A97F7AB00E5BE62 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FADB2A97F7AB00E5BE62 /* BaseRouter.swift */; };
-		7C90FADE2A97F8B000E5BE62 /* NBActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FADD2A97F8B000E5BE62 /* NBActivityIndicator.swift */; };
+		7C90FADE2A97F8B000E5BE62 /* NBLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FADD2A97F8B000E5BE62 /* NBLoadingView.swift */; };
 		7C90FAE02A97F96000E5BE62 /* NBColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FADF2A97F96000E5BE62 /* NBColor.swift */; };
 		7C90FAE62A97FBAD00E5BE62 /* ItemsListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FAE52A97FBAD00E5BE62 /* ItemsListRepository.swift */; };
 		7C90FAEA2A97FBCD00E5BE62 /* BaseRouterContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C90FAE92A97FBCD00E5BE62 /* BaseRouterContract.swift */; };
@@ -97,8 +97,8 @@
 		7C6CFB1B2A9A2D7700F24156 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
 		7C6CFB1D2A9A2E9C00F24156 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		7C6CFB232A9A3FD600F24156 /* ItemDetailsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsRepository.swift; sourceTree = "<group>"; };
-		7C6CFB252A9A496C00F24156 /* NBViewControllerPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBViewControllerPlaceholder.swift; sourceTree = "<group>"; };
-		7C6CFB2A2A9A4BF500F24156 /* NBViewControllerPlaceholderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBViewControllerPlaceholderModel.swift; sourceTree = "<group>"; };
+		7C6CFB252A9A496C00F24156 /* NBErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBErrorView.swift; sourceTree = "<group>"; };
+		7C6CFB2A2A9A4BF500F24156 /* NBErrorViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBErrorViewData.swift; sourceTree = "<group>"; };
 		7C6CFB2C2A9A61B800F24156 /* NBViewControllerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBViewControllerState.swift; sourceTree = "<group>"; };
 		7C6CFB2E2A9A6FCC00F24156 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7C6CFB312A9A7D1D00F24156 /* NBCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBCollectionView.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 		7C90FAD62A97F43A00E5BE62 /* ItemDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsRouter.swift; sourceTree = "<group>"; };
 		7C90FAD82A97F44500E5BE62 /* ItemDetailsContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsContract.swift; sourceTree = "<group>"; };
 		7C90FADB2A97F7AB00E5BE62 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
-		7C90FADD2A97F8B000E5BE62 /* NBActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBActivityIndicator.swift; sourceTree = "<group>"; };
+		7C90FADD2A97F8B000E5BE62 /* NBLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBLoadingView.swift; sourceTree = "<group>"; };
 		7C90FADF2A97F96000E5BE62 /* NBColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBColor.swift; sourceTree = "<group>"; };
 		7C90FAE52A97FBAD00E5BE62 /* ItemsListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListRepository.swift; sourceTree = "<group>"; };
 		7C90FAE92A97FBCD00E5BE62 /* BaseRouterContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouterContract.swift; sourceTree = "<group>"; };
@@ -255,12 +255,12 @@
 			path = ItemDetails;
 			sourceTree = "<group>";
 		};
-		7C6CFB272A9A4BBE00F24156 /* NBActivityIndicator */ = {
+		7C6CFB272A9A4BBE00F24156 /* NBLoadingView */ = {
 			isa = PBXGroup;
 			children = (
-				7C90FADD2A97F8B000E5BE62 /* NBActivityIndicator.swift */,
+				7C90FADD2A97F8B000E5BE62 /* NBLoadingView.swift */,
 			);
-			path = NBActivityIndicator;
+			path = NBLoadingView;
 			sourceTree = "<group>";
 		};
 		7C6CFB282A9A4BC700F24156 /* NBViewController */ = {
@@ -272,13 +272,13 @@
 			path = NBViewController;
 			sourceTree = "<group>";
 		};
-		7C6CFB292A9A4BCA00F24156 /* NBViewControllerPlaceholder */ = {
+		7C6CFB292A9A4BCA00F24156 /* NBErrorView */ = {
 			isa = PBXGroup;
 			children = (
-				7C6CFB252A9A496C00F24156 /* NBViewControllerPlaceholder.swift */,
-				7C6CFB2A2A9A4BF500F24156 /* NBViewControllerPlaceholderModel.swift */,
+				7C6CFB252A9A496C00F24156 /* NBErrorView.swift */,
+				7C6CFB2A2A9A4BF500F24156 /* NBErrorViewData.swift */,
 			);
-			path = NBViewControllerPlaceholder;
+			path = NBErrorView;
 			sourceTree = "<group>";
 		};
 		7C6CFB302A9A7C3700F24156 /* NBCollectionView */ = {
@@ -369,8 +369,8 @@
 			isa = PBXGroup;
 			children = (
 				7C6CFB282A9A4BC700F24156 /* NBViewController */,
-				7C6CFB292A9A4BCA00F24156 /* NBViewControllerPlaceholder */,
-				7C6CFB272A9A4BBE00F24156 /* NBActivityIndicator */,
+				7C6CFB292A9A4BCA00F24156 /* NBErrorView */,
+				7C6CFB272A9A4BBE00F24156 /* NBLoadingView */,
 				7C6CFB302A9A7C3700F24156 /* NBCollectionView */,
 				7C6315822AC8534800374C75 /* NBView */,
 			);
@@ -653,14 +653,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CEB56FE2A97EC2C00D520FF /* AppDelegate.swift in Sources */,
-				7C6CFB2B2A9A4BF500F24156 /* NBViewControllerPlaceholderModel.swift in Sources */,
+				7C6CFB2B2A9A4BF500F24156 /* NBErrorViewData.swift in Sources */,
 				7C6CFB1C2A9A2D7700F24156 /* BaseRepository.swift in Sources */,
 				7C6315842AC8536F00374C75 /* NBView.swift in Sources */,
 				7C0169762A9C053B00DEF05F /* NBImage.swift in Sources */,
 				7C6CFB172A9A1FB400F24156 /* NetworkError.swift in Sources */,
 				7C90FADC2A97F7AB00E5BE62 /* BaseRouter.swift in Sources */,
 				7C6CFB1E2A9A2E9C00F24156 /* API.swift in Sources */,
-				7C90FADE2A97F8B000E5BE62 /* NBActivityIndicator.swift in Sources */,
+				7C90FADE2A97F8B000E5BE62 /* NBLoadingView.swift in Sources */,
 				7CCFB15F2A9D1BF400D2F29C /* ContactCollectionViewCell.swift in Sources */,
 				7C90FAD52A97F42E00E5BE62 /* ItemDetailsPresenter.swift in Sources */,
 				7C90FAD72A97F43A00E5BE62 /* ItemDetailsRouter.swift in Sources */,
@@ -669,7 +669,7 @@
 				7C01696E2A9C029100DEF05F /* AddressCollectionViewCell.swift in Sources */,
 				7C90FAD92A97F44500E5BE62 /* ItemDetailsContract.swift in Sources */,
 				7C6CFB392A9A87FF00F24156 /* ItemCollectionViewCell.swift in Sources */,
-				7C6CFB262A9A496C00F24156 /* NBViewControllerPlaceholder.swift in Sources */,
+				7C6CFB262A9A496C00F24156 /* NBErrorView.swift in Sources */,
 				7C6315882AC853EC00374C75 /* NBViewModel.swift in Sources */,
 				7C90FACB2A97F3D000E5BE62 /* ItemsListViewController.swift in Sources */,
 				7CCFB1702A9D3E2700D2F29C /* String + encodeUrl.swift in Sources */,

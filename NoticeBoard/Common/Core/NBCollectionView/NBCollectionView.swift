@@ -62,6 +62,8 @@ class NBCollectionView: UIView {
         let layout = setupCollectionViewLayout()
         let colView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         colView.backgroundColor = NBColor.NBMain.backgroundColor
+        colView.showsVerticalScrollIndicator = false
+        colView.showsHorizontalScrollIndicator = false
         colView.translatesAutoresizingMaskIntoConstraints = false
         colView.delegate = self
         colView.dataSource = self

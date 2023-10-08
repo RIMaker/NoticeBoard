@@ -32,8 +32,8 @@ enum NBColor {
         
     }
     
-    //MARK: NBActivityIndicator
-    enum NBActivityIndicator {
+    //MARK: NBLoadingView
+    enum NBLoadingView {
         
         enum BackgroundColor {
             
@@ -55,8 +55,8 @@ enum NBColor {
         }
     }
     
-    //MARK: NBViewControllerPlaceholder
-    enum NBViewControllerPlaceholder {
+    //MARK: NBErrorView
+    enum NBErrorView {
         
         enum Button {
             static var textColor: UIColor {

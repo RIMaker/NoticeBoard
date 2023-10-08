@@ -14,7 +14,8 @@ final class ItemDetailsViewController: NBViewController {
     private lazy var collectionView = NBCollectionView(cellsScalingEffectIsEnable: false)
     
     override func loadView() {
-        view = collectionView
+        super.loadView()
+        contentView = collectionView
     }
 
     override func viewDidLoad() {
